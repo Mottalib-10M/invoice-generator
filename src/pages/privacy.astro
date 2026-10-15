@@ -1,0 +1,26 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import LegalIdentity from '../components/LegalIdentity.astro';
+import { CONTACT_EMAIL, LAST_UPDATED, LEGAL } from '../data/site-config';
+import { route } from '../i18n/routes';
+const lang = 'en';
+---
+<PageLayout title="Privacy policy: your invoices never leave your browser, 2026" description="Invoices, customers, amounts and bank details typed in the generator stay on your device. No cookies, no account, no upload; what your browser keeps and your rights." lang={lang} noindex={true} breadcrumbs={[{ label: 'Privacy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Privacy policy</h1>
+    <h2>Who is responsible</h2>
+    <LegalIdentity lang={lang} />
+    <h2>What the generator does with what you type</h2>
+    <p>Nothing leaves your device. Your business details, your customer's details, the lines, amounts, bank details and logo are processed by code running in your browser; the PDF is built there too. None of it is sent to a server, so the publisher never sees it.</p>
+    <p>For your convenience, your own business details (name, address, email, tax number, logo, payment details, notes, country and last invoice number) are kept in your browser's local storage on this device, for the next invoice. Customer details and invoice lines are not kept. The "Forget my details" link deletes what is stored, as does clearing this site's data in your browser. On a shared computer, use that link when you finish.</p>
+    <h2>What the host records</h2>
+    <p>Like any web host, GitHub Pages records technical data for each request (IP address, date, page, browser). The publisher does not receive or use these logs for profiling. They are kept according to GitHub's own policy, which may involve processing in the United States.</p>
+    <h2>Anonymous stability monitoring, no cookies</h2>
+    <p>To keep the site working, it can use Microsoft Clarity, provided by Microsoft Ireland Operations Limited, One Microsoft Place, Dublin, in cookie-free mode: errors, loading times and dead clicks are measured for each page view, without a cookie and without linking visits; everything typed in the generator and the invoice preview are masked. Microsoft receives the technical data of the request, including the IP address from which an approximate location is derived, keeps recordings for 30 days and aggregated data for up to 13 months, and may process it in the United States. Under the GDPR the basis is legitimate interest in a working site (Article 6(1)(f)). You can object by blocking clarity.ms or writing to us. Cookie details are on the <a href={route('cookies', lang)}>cookies</a> page.</p>
+    <h2>Messages you send</h2>
+    <p>If you email us, your address and message are used only to reply and are kept for three years after the last exchange.</p>
+    <h2>Your rights</h2>
+    <p>Because the publisher is established in France, the EU General Data Protection Regulation applies; the UK GDPR, Canada's PIPEDA and Quebec's Law 25, the Australian Privacy Principles and US state privacy laws give you comparable rights. You can ask what we hold about you, have it corrected or erased: write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. You may also complain to your own data protection authority or to the {LEGAL.supervisoryAuthority}.</p>
+    <p>Last updated: {LAST_UPDATED}.</p>
+  </div>
+</PageLayout>

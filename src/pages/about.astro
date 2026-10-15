@@ -1,0 +1,29 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { route } from '../i18n/routes';
+import { AUTHOR_NAME, CONTACT_EMAIL, LAST_UPDATED } from '../data/site-config';
+import { personSchema, organizationSchema, profilePageSchema } from '../lib/seo';
+import { displayDate } from '../lib/format';
+import { US_STATES } from '../lib/engine/params';
+const lang = 'en';
+const jsonLd = [organizationSchema(lang), personSchema(lang), profilePageSchema({ path: route('about', lang), lang })];
+---
+<PageLayout title="Tax Invoice Maker publisher: who checks the rates and rules" description="Who publishes this free invoice generator, why it applies each country's own tax rules, how it is funded, why it stores nothing, and how to report an error." lang={lang} jsonLd={jsonLd} breadcrumbs={[{ label: 'About' }]}>
+  <div class="prose prose-slate max-w-none">
+    <h1>About this invoice generator</h1>
+    <p>Tax Invoice Maker is published by {AUTHOR_NAME}, an independent publisher of free calculators. It was built for a precise gap: the free invoice tools at the top of the search results make a tidy PDF, but they leave the tax to a single percentage box and say nothing about what the law requires the invoice to show. For a freelancer in Leeds, a contractor in Ontario or a photographer in Brisbane, those two things are the reason the invoice gets queried or the tax credit refused.</p>
+    <h2>What we do differently</h2>
+    <p>The generator carries the tax rules of four countries: the general sales tax rate of each of the {US_STATES.length} US states and the District of Columbia, UK VAT with HMRC's rounding, reverse charge and CIS deduction, GST, HST, PST, RST and QST for each Canadian province and territory, and Australian GST with the ATO's tax invoice wording. Next to the preview, it checks the invoice against the official list of required details for the country and the amount. This site does better than the first search result because the tax on the invoice is the one that applies where you sell, and because it tells you, before you send it, which required detail is still missing.</p>
+    <h2>Why nothing is uploaded</h2>
+    <p>Invoices hold bank details, customer names and prices. The generator therefore runs entirely in the page: the calculation, the preview and the PDF are made on your device, with no account and no upload. We could not read your invoices even if we wanted to. Your own business details are remembered in your browser so that the next invoice starts filled in, and one link deletes them.</p>
+    <h2>How the figures are checked</h2>
+    <p>Each rate and rule is read on the authority's page and dated; scripts re-read those pages and the Bank of England rate every week. The engine is tested against official worked examples, including HMRC's sample VAT invoice, GOV.UK's late payment example and the Australian Business Register's ABN check. The <a href={route('method', lang)}>methodology page</a> lists every source and every test.</p>
+    <h2>What we do not do</h2>
+    <p>We do not sell accounting software, take referral fees, collect email addresses or show a paywall. We do not advise on whether you must register for a tax or how to account for it: the site applies the published rules and leaves that judgement to you, your accountant or the authority.</p>
+    <h2>Funding</h2>
+    <p>The site is free. It may show a small number of clearly marked advertising slots; none will ever sit above the generator or inside the invoice.</p>
+    <h2>Corrections</h2>
+    <p>If a rate or a required detail looks wrong, write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> with the page, the country and the case. A confirmed error is corrected in the parameter file, which updates the generator and every page at once. The rules are in the <a href={route('editorial', lang)}>editorial policy</a>.</p>
+    <p>Last full review of the rates and rules: <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-GB')}</time>.</p>
+  </div>
+</PageLayout>

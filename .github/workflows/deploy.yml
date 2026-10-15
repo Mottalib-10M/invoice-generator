@@ -1,0 +1,74 @@
+name: Build, refresh official data and deploy to GitHub Pages
+
+# push : déploiement normal. schedule : chaque lundi, relit les données officielles (taux de la
+# Banque d'Angleterre pour l'intérêt de retard britannique, taux des 51 États, pages des autorités),
+# les enregistre dans le dépôt si elles ont changé, puis reconstruit et redéploie.
+on:
+  push:
+    branches: ['main']
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh official data (schedule and manual runs)
+        if: github.event_name != 'push'
+        run: |
+          pip install pypdf
+          python3 scripts/data/fetch-bank-rate.py
+          python3 scripts/data/verify-us-rates.py || echo "::warning::Some US state rates were not found on their official page: read them by hand"
+          python3 scripts/data/check-params.py || echo "::warning::An official page no longer shows a value of params-2026.json: re-read it"
+      - name: Commit refreshed data
+        if: github.event_name != 'push'
+        run: |
+          if [ -n "$(git status --porcelain src/data)" ]; then
+            git config user.name "data-refresh-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add src/data
+            git commit -m "Données officielles relues le $(date -u +%Y-%m-%d) (Action planifiée)"
+            git push
+          fi
+      - name: Install dependencies
+        run: npm ci
+      - name: Engine tests
+        run: npx vitest run
+      - name: Build (with snippet checks)
+        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

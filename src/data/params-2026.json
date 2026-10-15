@@ -1,0 +1,334 @@
+{
+  "_lisezmoi": "Every tax rate, threshold and invoice rule used by the engine. Each value was read on the official page named in `sources` on the date in `read`. Never write one of these numbers in a page: pages read them from here (RECETTE §4, §17.4). US state rates live in us-states.json (scripts/data/verify-us-rates.py) and the Bank of England rate in uk-bank-rate.json (scripts/data/fetch-bank-rate.py).",
+  "year": 2026,
+  "retrieved_at": "2026-10-15",
+  "valid_from": "2026-01-01",
+  "valid_to": "2026-12-31",
+  "uk": {
+    "vat_rates": {
+      "standard": 0.2,
+      "reduced": 0.05,
+      "zero": 0
+    },
+    "vat_standard_since": "2011-01-04",
+    "vat_threshold": 90000,
+    "simplified_invoice_max": 250,
+    "issue_within_days": 30,
+    "rounding": "Total VAT on an invoice may be rounded down to a whole penny (VAT Notice 700, 17.5).",
+    "reverse_charge_wordings": [
+      "VAT Act 1994 Section 55A applies",
+      "S55A VATA 94 applies",
+      "Customer to pay the VAT to HMRC"
+    ],
+    "late_payment": {
+      "margin": 0.08,
+      "compensation": [
+        {
+          "below": 1000,
+          "amount": 40
+        },
+        {
+          "below": 10000,
+          "amount": 70
+        },
+        {
+          "below": null,
+          "amount": 100
+        }
+      ],
+      "default_days": 30,
+      "b2b_max_days": 60,
+      "public_max_days": 30,
+      "official_example": {
+        "debt": 1000,
+        "base": 0.005,
+        "annual": 85,
+        "daily": 0.23,
+        "days": 50,
+        "interest": 11.5
+      }
+    },
+    "cis": {
+      "registered": 0.2,
+      "unregistered": 0.3,
+      "gross": 0
+    }
+  },
+  "ca": {
+    "gst": 0.05,
+    "provinces": {
+      "AB": {
+        "name": "Alberta",
+        "kind": "gst"
+      },
+      "BC": {
+        "name": "British Columbia",
+        "kind": "gst_pst",
+        "pst": 0.07,
+        "pst_name": "PST"
+      },
+      "MB": {
+        "name": "Manitoba",
+        "kind": "gst_pst",
+        "pst": 0.07,
+        "pst_name": "RST"
+      },
+      "NB": {
+        "name": "New Brunswick",
+        "kind": "hst",
+        "hst": 0.15
+      },
+      "NL": {
+        "name": "Newfoundland and Labrador",
+        "kind": "hst",
+        "hst": 0.15
+      },
+      "NS": {
+        "name": "Nova Scotia",
+        "kind": "hst",
+        "hst": 0.14,
+        "hst_previous": 0.15,
+        "changed": "2025-04-01"
+      },
+      "NT": {
+        "name": "Northwest Territories",
+        "kind": "gst"
+      },
+      "NU": {
+        "name": "Nunavut",
+        "kind": "gst"
+      },
+      "ON": {
+        "name": "Ontario",
+        "kind": "hst",
+        "hst": 0.13
+      },
+      "PE": {
+        "name": "Prince Edward Island",
+        "kind": "hst",
+        "hst": 0.15
+      },
+      "QC": {
+        "name": "Quebec",
+        "kind": "gst_qst",
+        "pst": 0.09975,
+        "pst_name": "QST"
+      },
+      "SK": {
+        "name": "Saskatchewan",
+        "kind": "gst_pst",
+        "pst": 0.06,
+        "pst_name": "PST"
+      },
+      "YT": {
+        "name": "Yukon",
+        "kind": "gst"
+      }
+    },
+    "itc_tiers": [
+      100,
+      500
+    ],
+    "small_supplier": 30000,
+    "hst_history": {
+      "_source": "ca_rates (CRA table of previous rates, read 2026-10-15)",
+      "periods": [
+        "2013-04-01",
+        "2016-07-01",
+        "2016-10-01",
+        "2025-04-01"
+      ],
+      "rates": {
+        "NB": [
+          0.13,
+          0.13,
+          0.15,
+          0.15
+        ],
+        "NL": [
+          0.13,
+          0.15,
+          0.15,
+          0.15
+        ],
+        "NS": [
+          0.15,
+          0.15,
+          0.15,
+          0.14
+        ],
+        "PE": [
+          0.14,
+          0.14,
+          0.15,
+          0.15
+        ]
+      }
+    }
+  },
+  "au": {
+    "gst": 0.1,
+    "registration_threshold": 75000,
+    "nfp_threshold": 150000,
+    "tax_invoice_on_request_above": 82.5,
+    "buyer_identity_from": 1000,
+    "provide_within_days": 28
+  },
+  "sources": {
+    "uk_invoice": {
+      "url": "https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include",
+      "label": "GOV.UK: Invoicing and taking payment from customers, invoices: what they must include",
+      "read": "2026-10-15"
+    },
+    "uk_vat_records": {
+      "url": "https://www.gov.uk/guidance/record-keeping-for-vat-notice-70021",
+      "label": "HMRC, VAT Notice 700/21: record keeping for VAT, sections 3 and 4 (VAT invoices)",
+      "read": "2026-10-15"
+    },
+    "uk_vat_guide": {
+      "url": "https://www.gov.uk/guidance/vat-guide-notice-700",
+      "label": "HMRC, VAT Notice 700: the VAT guide, 17.5 rounding of amounts",
+      "read": "2026-10-15"
+    },
+    "uk_vat_rates": {
+      "url": "https://www.gov.uk/vat-rates",
+      "label": "GOV.UK: VAT rates (20%, 5%, 0%)",
+      "read": "2026-10-15"
+    },
+    "uk_vat_register": {
+      "url": "https://www.gov.uk/vat-registration/when-to-register",
+      "label": "GOV.UK: VAT registration, when to register (£90,000 threshold)",
+      "read": "2026-10-15"
+    },
+    "uk_reverse_charge": {
+      "url": "https://www.gov.uk/guidance/vat-reverse-charge-technical-guide",
+      "label": "HMRC: VAT domestic reverse charge technical guide, invoices and other VAT documents",
+      "read": "2026-10-15"
+    },
+    "uk_reverse_charge_scope": {
+      "url": "https://www.gov.uk/guidance/vat-domestic-reverse-charge-for-building-and-construction-services",
+      "label": "HMRC: check when you must use the VAT domestic reverse charge for building and construction services",
+      "read": "2026-10-15"
+    },
+    "uk_cis": {
+      "url": "https://www.gov.uk/what-you-must-do-as-a-cis-contractor/make-deductions-and-pay-subcontractors",
+      "label": "GOV.UK: CIS contractors, make deductions and pay subcontractors (20%, 30%, 0%)",
+      "read": "2026-10-15"
+    },
+    "uk_late_terms": {
+      "url": "https://www.gov.uk/late-commercial-payments-interest-debt-recovery/payment-terms",
+      "label": "GOV.UK: late commercial payments, when a payment becomes late (30 and 60 days)",
+      "read": "2026-10-15"
+    },
+    "uk_late_interest": {
+      "url": "https://www.gov.uk/late-commercial-payments-interest-debt-recovery/charging-interest-commercial-debt",
+      "label": "GOV.UK: interest on late commercial payments (8% plus Bank of England base rate)",
+      "read": "2026-10-15"
+    },
+    "uk_late_costs": {
+      "url": "https://www.gov.uk/late-commercial-payments-interest-debt-recovery/claim-debt-recovery-costs",
+      "label": "GOV.UK: claim debt recovery costs on late payments (£40, £70, £100)",
+      "read": "2026-10-15"
+    },
+    "uk_late_act": {
+      "url": "https://www.legislation.gov.uk/ukpga/1998/20/contents",
+      "label": "Late Payment of Commercial Debts (Interest) Act 1998",
+      "read": "2026-10-15"
+    },
+    "uk_late_rate_order": {
+      "url": "https://www.legislation.gov.uk/uksi/2002/1675/made",
+      "label": "Late Payment of Commercial Debts (Rate of Interest) (No. 3) Order 2002, article 4 (reference rate on 30 June and 31 December)",
+      "read": "2026-10-15"
+    },
+    "boe_bank_rate": {
+      "url": "https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp",
+      "label": "Bank of England: official Bank Rate history (series IUDBEDR)",
+      "read": "2026-10-15"
+    },
+    "ca_rates": {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html",
+      "label": "Canada Revenue Agency: GST/HST provincial rates table (effective April 1, 2025)",
+      "read": "2026-10-15"
+    },
+    "ca_itc_regs": {
+      "url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-91-45/FullText.html",
+      "label": "Input Tax Credit Information (GST/HST) Regulations, SOR/91-45, section 3",
+      "read": "2026-10-15"
+    },
+    "ca_eta": {
+      "url": "https://laws-lois.justice.gc.ca/eng/acts/E-15/FullText.html",
+      "label": "Excise Tax Act, R.S.C. 1985, c. E-15, section 165 (GST at 5%)",
+      "read": "2026-10-15"
+    },
+    "rq_invoices": {
+      "url": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/preparing-invoices/",
+      "label": "Revenu Québec: preparing invoices, information required to justify ITCs and ITRs",
+      "read": "2026-10-15",
+      "via": "https://web.archive.org/web/20250326015335/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/preparing-invoices/"
+    },
+    "rq_showing": {
+      "url": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/showing-the-taxes/",
+      "label": "Revenu Québec: showing the GST and QST",
+      "read": "2026-10-15",
+      "via": "https://web.archive.org/web/20250325091543/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/showing-the-taxes/"
+    },
+    "rq_small": {
+      "url": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/registering-for-the-gst-and-qst/small-suppliers/",
+      "label": "Revenu Québec: small suppliers ($30,000)",
+      "read": "2026-10-15",
+      "via": "https://web.archive.org/web/20250120093325/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/registering-for-the-gst-and-qst/small-suppliers/"
+    },
+    "bc_pst": {
+      "url": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/pst",
+      "label": "Government of British Columbia: provincial sales tax (PST), 7%",
+      "read": "2026-10-15"
+    },
+    "mb_rst": {
+      "url": "https://www.gov.mb.ca/finance/taxation/taxes/retail.html",
+      "label": "Manitoba Finance: retail sales tax, general rate 7%",
+      "read": "2026-10-15"
+    },
+    "sk_pst": {
+      "url": "https://www.saskatchewan.ca/business/taxes-licensing-and-reporting/provincial-taxes-policies-and-bulletins/provincial-sales-tax",
+      "label": "Government of Saskatchewan: provincial sales tax (PST), 6%",
+      "read": "2026-10-15"
+    },
+    "ato_tax_invoices": {
+      "url": "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/tax-invoices",
+      "label": "Australian Taxation Office: tax invoices (7 details, $82.50, $1,000, rounding)",
+      "read": "2026-10-15",
+      "via": "https://web.archive.org/web/20261007084104/https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/tax-invoices"
+    },
+    "ato_register": {
+      "url": "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst",
+      "label": "Australian Taxation Office: registering for GST ($75,000 threshold)",
+      "read": "2026-10-15",
+      "via": "https://web.archive.org/web/20261007014616/https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst"
+    },
+    "au_gst_act": {
+      "url": "https://www.legislation.gov.au/C2004A00446/latest/text",
+      "label": "A New Tax System (Goods and Services Tax) Act 1999, section 9-70 (GST at 10%)",
+      "read": "2026-10-15"
+    },
+    "abr_abn_format": {
+      "url": "https://abr.business.gov.au/Help/AbnFormat",
+      "label": "Australian Business Register: ABN format and check digit (modulus 89)",
+      "read": "2026-10-15"
+    },
+    "us_states": {
+      "url": "https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm",
+      "label": "State revenue departments: one official rate page per state (51 pages, listed on the methodology page)",
+      "read": "2026-10-15"
+    },
+    "us_wayfair": {
+      "url": "https://www.supremecourt.gov/opinions/boundvolumes/585BV.pdf",
+      "label": "Supreme Court of the United States, South Dakota v. Wayfair, Inc., 585 U.S. 162 (2018), bound volume 585",
+      "read": "2026-10-15"
+    },
+    "irs_w9": {
+      "url": "https://www.irs.gov/forms-pubs/about-form-w-9",
+      "label": "IRS: About Form W-9, Request for Taxpayer Identification Number and Certification",
+      "read": "2026-10-15"
+    }
+  }
+}

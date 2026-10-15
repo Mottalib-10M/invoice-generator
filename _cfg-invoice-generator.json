@@ -1,0 +1,64 @@
+{
+ "legalCountry": "France",
+ "registerLabel": "SIREN",
+ "vatLabel": "VAT",
+ "jurisdiction": "France",
+ "supervisoryAuthority": "Commission nationale de l'informatique et des libertés (CNIL)",
+ "supervisoryAuthorityUrl": "https://www.cnil.fr",
+ "consentMode": "none",
+ "year": 2026,
+ "founded": "2026",
+ "volumes": "/private/tmp/claude-501/-Users-mottalib/dee0c9f8-666c-41dc-a337-ed95eb787ee7/scratchpad/invoice-volumes-kp.txt",
+ "volumesNote": "Environ 411 000 recherches/mois US mesurées au Keyword Planner (4 requêtes nommées), ~720 000 US+UK+CA+AU ; site validé par l'éditeur le 2026-10-15.",
+ "folder": "invoice-generator",
+ "outDir": "a-publier/Mottalib-10M",
+ "url": "https://taxinvoicemaker.com",
+ "locales": [
+  "en"
+ ],
+ "names": {
+  "en": "Tax Invoice Maker"
+ },
+ "langTags": {
+  "en": "en-US"
+ },
+ "ogLocales": {
+  "en": "en_US"
+ },
+ "localeTag": "en-US",
+ "currency": "USD",
+ "symbol": "INV",
+ "accent": "#0E5A4A",
+ "authorRole": {
+  "en": "Publisher of the free invoice generator with sales tax, VAT and GST rules for the US, UK, Canada and Australia"
+ },
+ "authorDesc": {
+  "en": "Radif Partners builds the invoice generator that applies each country's own tax and invoice rules: state sales tax rates from the 51 revenue departments, HMRC VAT invoice requirements, CRA and Revenu Québec GST/HST/PST/QST rates and ITC thresholds, and the ATO tax invoice rules, every rate dated and linked to the authority that sets it."
+ },
+ "email": "contact@taxinvoicemaker.com",
+ "indexnow": "1575c7b83b674969445ca41d2760b0c1",
+ "shortName": "Tax Invoice Maker",
+ "description": "Free invoice generator with no sign-up: PDF made in your browser, with US state sales tax, UK VAT, Canadian GST/HST/PST/QST and Australian GST applied correctly.",
+ "port": 5500,
+ "og": [
+  {
+   "file": "og-en.png",
+   "title": "Tax Invoice Maker",
+   "subtitle": "",
+   "badge": "2026",
+   "brand": "Tax Invoice Maker"
+  }
+ ],
+ "lastUpdated": "2026-10-15",
+ "knowsAbout": {
+  "en": [
+   "Invoice requirements",
+   "US state sales tax rates",
+   "UK VAT invoices",
+   "Canadian GST/HST, PST and QST",
+   "Australian GST tax invoices",
+   "Late Payment of Commercial Debts (Interest) Act 1998",
+   "Payment terms"
+  ]
+ }
+}

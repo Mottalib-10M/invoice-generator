@@ -1,0 +1,11 @@
+---
+import ContentPage from '../components/ContentPage.astro';
+import { PAGES } from '../lib/pages';
+import type { PageDef } from '../lib/page-types';
+export function getStaticPaths() {
+  return PAGES.map((page) => ({ params: { slug: page.path.replace(/^\/|\/$/g, '') }, props: { page } }));
+}
+interface Props { page: PageDef }
+const { page } = Astro.props;
+---
+<ContentPage page={page} />

@@ -1,0 +1,23 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { route } from '../i18n/routes';
+import { REVIEW_CYCLE_MONTHS } from '../data/site-config';
+const lang = 'en';
+---
+<PageLayout title="Editorial policy: how Tax Invoice Maker checks rates and rules" description="How the sales tax, VAT, GST, HST, PST and QST rates and the invoice rules on this site are read, dated, tested and corrected, and what triggers an update in 2026." lang={lang} noindex={true} breadcrumbs={[{ label: 'Editorial policy' }]}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Editorial policy</h1>
+    <h2>Only the authorities count as sources</h2>
+    <p>Every rate, threshold and required invoice detail comes from the body that sets it: HMRC and GOV.UK for VAT, the reverse charge, CIS and late payment; the Canada Revenue Agency, the Justice Laws text of the Excise Tax Act and its regulations, Revenu Québec and the finance ministries of British Columbia, Manitoba and Saskatchewan for Canada; the Australian Taxation Office and the Australian Business Register for GST and ABNs; the revenue department or statute of each US state for sales tax; the Bank of England for Bank Rate. Accounting software blogs and template sites are never a source, even when they are right.</p>
+    <h2>Every figure is dated</h2>
+    <p>Each source carries the date it was read. Where an authority's site refuses automated readers, the same official page is read through a dated web.archive.org capture, and the <a href={route('method', lang)}>methodology page</a> says so. Scripts in the repository re-read the pages and flag any value that is no longer found.</p>
+    <h2>Tested before publication</h2>
+    <p>The tax engine is a set of pure functions with automated tests. Each test is a worked example from an official page (HMRC's sample VAT invoice, GOV.UK's late payment example, the ABR's check digit example) or a case computed by hand from the published rule. A build that fails any of them is not published.</p>
+    <h2>When we update</h2>
+    <p>The Bank of England rate is fetched every week by a scheduled job, because it moves the UK late payment interest. US state rates and the authorities' pages are re-checked by the same job, and every rule is read in full at least every {REVIEW_CYCLE_MONTHS} months. A change in force is applied the week it is published.</p>
+    <h2>Corrections</h2>
+    <p>Errors reported through the <a href={route('contact', lang)}>contact page</a> are checked against the source within five working days. A confirmed error is fixed in the parameter file, which corrects every page and the generator at once.</p>
+    <h2>Independence</h2>
+    <p>No software vendor, bank or payment provider pays for a mention. Pages never recommend accounting software or a provider.</p>
+  </div>
+</PageLayout>

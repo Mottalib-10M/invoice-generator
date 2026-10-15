@@ -1,0 +1,123 @@
+---
+/**
+ * Home: the generator first (US by default), then the answer folded, then the tax rule of each
+ * country, the details an invoice must carry, worked examples from the engine, templates, terms,
+ * privacy and the method. All figures come from the engine or the parameter files.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import InvoiceGenerator from '../components/calc/InvoiceGenerator';
+import Clamp from '../components/Clamp.astro';
+import { route } from '../i18n/routes';
+import { PAGES, inGroup } from '../lib/pages';
+import { helpers } from '../lib/helpers';
+import { SOURCES, US_STATES, PROVINCES, BOE, type SourceKey } from '../lib/engine/params';
+import { websiteSchema, organizationSchema, faqSchema, webApplicationSchema } from '../lib/seo';
+import { AUTHOR_NAME } from '../data/site-config';
+
+const lang = 'en';
+const h = helpers();
+const P = h.P;
+const link = (id: string, text: string) => (PAGES.some((p) => p.id === id) ? `<a href="${route(id, lang)}">${text}</a>` : text);
+const title = 'Invoice Generator 2026: Free PDF with Sales Tax, VAT and GST';
+const description = 'Free invoice generator, no sign-up or watermark: PDF made in your browser, with US state sales tax, UK VAT, Canadian GST/HST/PST/QST and Australian GST, 2026.';
+const noState = US_STATES.filter((s) => !s.hasStateTax).map((s) => s.name);
+const localStates = US_STATES.filter((s) => s.local).length;
+const hst = Object.values(PROVINCES).filter((p) => p.kind === 'hst');
+const sale = 1000;
+const uk = h.calc({ country: 'UK', region: '', registered: true, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'standard' }] });
+const au = h.calc({ country: 'AU', region: 'NSW', registered: true, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'gst' }] });
+const on = h.calc({ country: 'CA', region: 'ON', registered: true, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'ca_full' }] });
+const qc = h.calc({ country: 'CA', region: 'QC', registered: true, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'ca_full' }] });
+const bc = h.calc({ country: 'CA', region: 'BC', registered: true, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'ca_full' }] });
+const tx = h.calc({ country: 'US', region: 'TX', registered: true, localRate: 2, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'taxable' }] });
+const ca = h.calc({ country: 'US', region: 'CA', registered: true, lines: [{ desc: 'x', qty: 1, price: sale, tax: 'taxable' }] });
+const ref = BOE.reference_rates[BOE.reference_rates.length - 1];
+const lateRate = P.uk.late_payment.margin + ref.base / 100;
+const resume = `An invoice generator is only as good as the tax it puts on the page, and that is where most free tools stop at a single "tax %" box. This one asks where you sell and applies the rule of that place: the state sales tax rate from each of the ${US_STATES.length} US revenue departments plus the local rate you add, UK VAT at ${h.pct(P.uk.vat_rates.standard)}, ${h.pct(P.uk.vat_rates.reduced)} or ${h.pct(0)} with HMRC's rounding and the domestic reverse charge, Canadian GST at ${h.pct(P.ca.gst)}, HST from ${h.pct(0.13)} to ${h.pct(0.15)}, PST, RST and Quebec's QST at ${h.pct(P.ca.provinces.QC.pst)}, and Australian GST at ${h.pct(P.au.gst)} with the words the ATO requires on a tax invoice. On a ${h.money(sale, 'UK')} sale that means ${h.money(uk.tax, 'UK')} of VAT in England, ${h.money(qc.tax, 'CA', 2)} of GST and QST in Montreal and ${h.money(au.tax, 'AU')} of GST in Sydney. Beside the preview, a checklist reads your invoice against the official list of required details for your country and amount. There is no account to create and no watermark, and the PDF is built in your browser, so nothing you type is sent to a server.`;
+const faqs = [
+  { q: 'Is this invoice generator really free, with no watermark?', a: 'Yes. There is no account, no trial, no paid tier and no watermark or "made with" line on the PDF. The file is drawn in your own browser with an open-source PDF library, so there is no server step where a watermark could be added. You can make as many invoices as you like; the only limit is the 600 KB size of a logo.' },
+  { q: 'Where is my invoice data stored?', a: 'Only in your browser. The invoice, the preview and the PDF are computed on your device, and nothing you type is sent to our server or anyone else. To save you retyping, your business name, address, tax number, logo, payment details and last invoice number are kept in this browser\'s local storage. The "Forget my details" link under the checklist deletes them.' },
+  { q: 'Which tax rate should I put on my invoice?', a: `The rate of the place where the sale is taxed, and only if you are registered. In the UK that is ${h.pct(P.uk.vat_rates.standard)} VAT for most sales. In Canada it depends on the customer's province: ${h.pct(0.13)} HST in Ontario, ${h.pct(P.ca.gst)} GST plus ${h.pct(P.ca.provinces.QC.pst)} QST in Quebec. Australia uses ${h.pct(P.au.gst)} GST. In the US, the state rate plus the local rate where the customer takes delivery.` },
+  { q: 'Can I make an invoice if I am not registered for VAT or GST?', a: `Yes, and you must not add tax to it. Set the registration switch to "No": the generator removes the tax lines, prints a short statement that no VAT or GST has been charged and, in Australia, stops using the words "Tax invoice". UK businesses must register once taxable turnover passes ${h.money(P.uk.vat_threshold, 'UK')} over 12 months; Australian ones at ${h.money(P.au.registration_threshold, 'AU')}; Canadian small suppliers at ${h.money(P.ca.small_supplier, 'CA')}.` },
+  { q: 'Does the PDF work in the US on Letter paper and in the UK on A4?', a: 'Yes. The page size follows the country you choose: US Letter for the United States and Canada, A4 for the United Kingdom and Australia. Dates follow the local style too, such as "October 15, 2026" in the US and "15 October 2026" in the UK. You can still print from the preview with your browser if you need another size.' },
+  { q: 'Can I invoice in euros or another currency?', a: 'Yes, pick any of the listed currencies; the totals and the PDF follow it. One rule matters in the UK: on a VAT invoice in a foreign currency, HMRC requires the total VAT to also be shown in sterling. When you choose a currency other than pounds with VAT, the generator adds a field for the sterling VAT figure and prints it on the invoice.' },
+  { q: 'How do I number my invoices?', a: 'Each invoice needs a unique number, and HMRC asks VAT-registered businesses for a sequential one. The generator starts at INV-2026-0001, remembers the last number you used in this browser and proposes the next one. A prefix with the year is a common choice because it lets you restart at 0001 each January without ever repeating a number.' },
+];
+const jsonLd = [websiteSchema(lang), organizationSchema(lang), webApplicationSchema({ name: 'Invoice generator with sales tax, VAT and GST', description, path: '/', lang }), faqSchema(faqs, lang)];
+const srcKeys: SourceKey[] = ['uk_vat_records', 'uk_invoice', 'ca_rates', 'ca_itc_regs', 'rq_invoices', 'ato_tax_invoices', 'ato_register', 'us_states'];
+const sources = srcKeys.map((k) => ({ name: SOURCES[k].label, url: SOURCES[k].url }));
+const countries = inGroup('countries');
+const templates = inGroup('templates').filter((p) => p.kind !== 'index');
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={jsonLd} faqs={faqs} sources={sources}>
+  <article>
+    <header class="mb-4">
+      <h1 class="text-[1.75rem] font-bold text-navy-900 max-sm:leading-tight sm:text-3xl md:text-4xl">Free invoice generator, with the tax done right</h1>
+      <p class="mt-2 text-base text-navy-700 sm:text-lg">Choose your country, type your lines, download the PDF. Sales tax, VAT or GST is applied by state, province or rate, and nothing leaves your browser.</p>
+    </header>
+    <div data-outil data-chrome class="mb-6"><InvoiceGenerator client:load country="US" preset="standard" methodHref={route('method', lang)} /></div>
+    <Clamp text={resume} lang={lang} id="clamp-home" class="mb-4" />
+    <p class="mb-8 text-sm text-navy-600">Checked by <a href={route('about', lang)} class="underline hover:text-navy-900">{AUTHOR_NAME}</a> · <a href={route('method', lang)} class="underline hover:text-navy-900">How the tax is calculated</a></p>
+
+    <section class="prose prose-slate max-w-none">
+      <h2>One generator, four tax systems</h2>
+      <p>The four countries do not tax a sale in the same way, and an invoice that copies the wrong model is either wrong or unusable by your customer. The generator switches its whole logic with the country selector: the tax lines, the wording, the page size, the date format and the checklist all change. These are the rules it applies.</p>
+      <Fragment set:html={h.table(['Country', 'Tax on the invoice', 'Rates applied', 'Registration', 'Generator page'], [
+        ['United States', 'State sales tax plus local taxes', `${h.pct(Math.min(...US_STATES.filter((s) => s.hasStateTax).map((s) => s.rate)) / 100)} to ${h.pct(Math.max(...US_STATES.map((s) => s.rate)) / 100)} at state level; none in ${noState.length} states`, 'Seller\'s permit from each state where you collect', link('invoice-generator-usa', 'US invoice generator')],
+        ['United Kingdom', 'VAT', `${h.pct(P.uk.vat_rates.standard)}, ${h.pct(P.uk.vat_rates.reduced)}, ${h.pct(0)}, exempt`, `Compulsory above ${h.money(P.uk.vat_threshold, 'UK')} of taxable turnover`, link('vat-invoice-generator-uk', 'VAT invoice generator')],
+        ['Canada', 'GST, HST, PST, RST or QST', `GST ${h.pct(P.ca.gst)}; HST ${h.pct(0.13)} to ${h.pct(0.15)}; QST ${h.pct(P.ca.provinces.QC.pst)}`, `Small supplier limit ${h.money(P.ca.small_supplier, 'CA')}`, link('invoice-generator-canada', 'Canada invoice generator')],
+        ['Australia', 'GST', `${h.pct(P.au.gst)}, GST-free, input-taxed`, `Compulsory from ${h.money(P.au.registration_threshold, 'AU')} of GST turnover`, link('tax-invoice-generator-australia', 'Tax invoice generator')],
+      ], 'Tax rules applied by the generator, read on the authorities\' pages in October 2026', ['l', 'l', 'l', 'l', 'l'])} />
+
+      <h2>Why a single "tax %" box gets invoices wrong</h2>
+      <p>Most free generators offer one percentage applied to the whole invoice. That works for a single-rate sale and fails as soon as reality is a little more complicated, which is most of the time.</p>
+      <p>In the US the rate is not one number per state. {localStates} of the {US_STATES.length} jurisdictions let cities, counties or districts add their own tax, and many services are not taxable while the goods sold with them are. The generator therefore keeps the state rate from the revenue department, lets you add the local rate of the delivery address, and lets you mark each line as taxable or not. Texas at {h.pct(h.us('TX').rate / 100, 2)} plus a {h.pct(0.02)} local rate puts {h.money(tx.tax, 'US')} of tax on a {h.money(sale, 'US')} taxable sale; California's {h.pct(h.us('CA').rate / 100, 2)} base rate puts {h.money(ca.tax, 'US')}.</p>
+      <p>In Canada, the province changes the structure, not just the rate. {hst.length} provinces charge one harmonized tax, while British Columbia, Manitoba, Saskatchewan and Quebec stack a provincial tax on top of the {h.pct(P.ca.gst)} GST, each computed on the price before GST. The same {h.money(sale, 'CA')} becomes {h.money(on.total, 'CA')} in Ontario, {h.money(bc.total, 'CA')} in Vancouver and {h.money(qc.total, 'CA', 2)} in Montreal, and a line can carry GST without PST when the provincial tax does not apply to it.</p>
+      <p>In the UK, a single invoice often mixes {h.pct(P.uk.vat_rates.standard)} and {h.pct(P.uk.vat_rates.reduced)} lines with zero-rated and exempt ones, HMRC lets invoice traders round the total VAT down to the penny, and building firms under the domestic reverse charge must state the VAT without charging it. In Australia, a price that includes GST holds exactly one-eleventh of GST, and the document must say it is a tax invoice. A per-line tax code, not a single box, is what lets the generator handle all of this.</p>
+
+      <h2>What an invoice has to show, country by country</h2>
+      <p>The checklist next to the preview is not a style guide. It reads the official list for your case and ticks each item off as you type. The lists are short, but they differ in ways that matter to the customer who wants to reclaim the tax.</p>
+      <Fragment set:html={h.table(['Country', 'Source', 'What the invoice must carry', 'Depends on the amount'], [
+        ['United Kingdom', h.src('uk_vat_records', 'VAT Notice 700/21'), 'Sequential number, time of supply, your name, address and VAT number, customer name and address, description, quantity, unit price, VAT rate and net per line, total VAT in sterling', `Simplified invoice allowed up to ${h.money(P.uk.simplified_invoice_max, 'UK')}`],
+        ['Canada', h.src('ca_itc_regs', 'ITC Information Regulations'), 'Your name, invoice date, total; then your GST/HST number and the tax; then the customer\'s name, the terms and a description', `Three bands: under ${h.money(P.ca.itc_tiers[0], 'CA')}, to ${h.money(P.ca.itc_tiers[1], 'CA')}, above`],
+        ['Quebec', h.src('rq_invoices', 'Revenu Québec'), 'The same as Canada, plus your QST number, and the QST amount and description at any amount', 'Yes, same bands'],
+        ['Australia', h.src('ato_tax_invoices', 'ATO'), '"Tax invoice", your identity and ABN, issue date, description with quantity and price, GST amount, extent taxable', `Buyer identity or ABN from ${h.money(P.au.buyer_identity_from, 'AU')}`],
+        ['United States', h.src('us_states', 'State revenue departments'), 'No federal list: number, parties, description, terms, and sales tax as its own line where you collect it', 'No'],
+      ], 'Required details, from the official texts', ['l', 'l', 'l', 'l'])} />
+      <p>The full lists, with what each item means in practice, are in the guides: {link('vat-invoice-requirements', 'UK VAT invoice requirements')}, {link('tax-invoice-requirements-australia', 'Australian tax invoice requirements')}, {link('gst-hst-invoice-requirements', 'GST/HST invoice requirements')} and {link('how-to-write-an-invoice', 'how to write an invoice')}.</p>
+
+      <h2>The same sale in each country</h2>
+      <p>To show the difference, here is one {h.money(sale, 'US')} sale before tax invoiced by a registered business, computed by the same engine that drives the generator.</p>
+      <Fragment set:html={h.table(['Where', 'Tax', 'Tax amount', 'Invoice total'], [
+        ['England', `VAT ${h.pct(P.uk.vat_rates.standard)}`, h.money(uk.tax, 'UK', 2), h.money(uk.total, 'UK', 2)],
+        ['Ontario', `HST ${h.pct(0.13)}`, h.money(on.tax, 'CA', 2), h.money(on.total, 'CA', 2)],
+        ['British Columbia', `GST ${h.pct(P.ca.gst)} + PST ${h.pct(P.ca.provinces.BC.pst)}`, h.money(bc.tax, 'CA', 2), h.money(bc.total, 'CA', 2)],
+        ['Quebec', `GST ${h.pct(P.ca.gst)} + QST ${h.pct(P.ca.provinces.QC.pst)}`, h.money(qc.tax, 'CA', 2), h.money(qc.total, 'CA', 2)],
+        ['New South Wales', `GST ${h.pct(P.au.gst)}`, h.money(au.tax, 'AU', 2), h.money(au.total, 'AU', 2)],
+        ['Austin, Texas', `${h.pct(h.us('TX').rate / 100, 2)} state + ${h.pct(0.02)} local`, h.money(tx.tax, 'US', 2), h.money(tx.total, 'US', 2)],
+        ['California (base rate)', h.pct(h.us('CA').rate / 100, 2), h.money(ca.tax, 'US', 2), h.money(ca.total, 'US', 2)],
+      ], 'A taxable sale of 1,000 in local currency, seller registered', ['l', 'l', 'r', 'r'])} />
+
+      <h2>Templates for the work you invoice</h2>
+      <p>Each template opens the same generator with lines, terms and wording that fit a job, so you start from something close to your own invoice rather than from a blank page:</p>
+      <ul>{templates.map((p) => <li><a href={route(p.id, lang)}>{p.nav}</a>: {p.card}</li>)}</ul>
+      <p>The country pages go further into each tax system: {countries.map((p, i) => <><a href={route(p.id, lang)}>{p.nav}</a>{i < countries.length - 1 ? ', ' : '.'}</>)}</p>
+
+      <h2>Getting paid on time</h2>
+      <p>The invoice date and the terms decide when the money is due, and in the UK they also decide when interest starts. If nothing is agreed, a business payment there is late {P.uk.late_payment.default_days} days after the customer receives the invoice; the agreed period between businesses should not normally go beyond {P.uk.late_payment.b2b_max_days} days. After that the Late Payment of Commercial Debts (Interest) Act 1998 lets you claim {h.pct(P.uk.late_payment.margin)} over the Bank of England reference rate, {h.pct(lateRate, 2)} a year for interest that starts to run from {h.date(ref.from)}, plus a fixed {h.money(P.uk.late_payment.compensation[0].amount, 'UK')} to {h.money(P.uk.late_payment.compensation[2].amount, 'UK')}. The {link('late-payment-interest-uk', 'late payment interest calculator')} works it out, and the guides on {link('payment-terms', 'payment terms')} and {link('early-payment-discount', 'early payment discounts')} cover the choices before that point.</p>
+
+      <h2>Why nothing leaves your browser</h2>
+      <p>An invoice carries a lot of private information: your bank details, your customer's address, what you charge. Many online generators ask for an email address before the download or store each invoice in an account, which is how they sell their accounting software later. Here the arithmetic, the preview and the PDF all run in the page itself. There is no account to create and no upload. The only thing kept is what you would otherwise retype each time, your own business details and last invoice number, and they stay in your browser's storage on this device until you remove them.</p>
+
+      <h2>How to make an invoice in five steps</h2>
+      <ol>
+        <li>Choose the country, then the state or province where the sale is taxed, and say whether you are registered for VAT, GST or sales tax.</li>
+        <li>Type each line with its quantity and price, and pick the tax code that applies to it: taxable, zero-rated, exempt, GST-free.</li>
+        <li>Add your business details, your tax number and, if you like, your logo. They are remembered on this device for next time.</li>
+        <li>Enter the customer, the invoice number, the date and the payment terms. The due date follows the terms.</li>
+        <li>Check the list beside the preview until every required detail is ticked, then download the PDF or print it.</li>
+      </ol>
+      <p>Every rate and rule above was read on the authority's own page, and the date of each reading is on the <a href={route('method', lang)}>methodology page</a>, with the cases used to test the engine and what it does not handle. The generator applies published rules; it is not tax advice, and the tax you owe is the one your authority assesses.</p>
+    </section>
+  </article>
+</PageLayout>

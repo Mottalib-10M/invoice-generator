@@ -1,0 +1,12 @@
+---
+import '../../styles/global.css';
+import InvoiceGenerator from '../../components/calc/InvoiceGenerator';
+import { route } from '../../i18n/routes';
+import { SITE_URL, SITE_NAMES } from '../../data/site-config';
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Free invoice generator with sales tax, VAT and GST</title><meta name="robots" content="noindex" /><link rel="canonical" href={`${SITE_URL}/`} /></head>
+<body class="bg-white p-3 text-navy-900">
+  <main><InvoiceGenerator client:load country="US" embed={true} methodHref={`${SITE_URL}${route('method', 'en')}`} /></main>
+  <p class="mt-2 text-sm"><a href={`${SITE_URL}/`} target="_blank" rel="noopener" class="text-accent-700 underline">Free invoice generator by {SITE_NAMES.en}</a> · not tax advice</p>
+</body></html>

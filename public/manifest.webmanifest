@@ -1,0 +1,21 @@
+{
+ "name": "Tax Invoice Maker",
+ "short_name": "Tax Invoice Maker",
+ "description": "Free invoice generator with no sign-up: PDF made in your browser, with US state sales tax, UK VAT, Canadian GST/HST/PST/QST and Australian GST applied correctly.",
+ "start_url": "/en/",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#0E5A4A",
+ "icons": [
+  {
+   "src": "/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

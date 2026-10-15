@@ -1,0 +1,68 @@
+---
+/**
+ * Methodology: what the engine computes per country, the rounding, the compliance checker, the tests,
+ * every source with its reading date (and archive capture where the authority blocks automated
+ * readers), the 51 US state sources with their automatic check, and the limits.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import { route } from '../i18n/routes';
+import { helpers } from '../lib/helpers';
+import { SOURCES, US_STATES, US_RETRIEVED, PROVINCES, PROVINCE_CODES, BOE, type SourceKey } from '../lib/engine/params';
+import { webPageSchema, breadcrumbSchema } from '../lib/seo';
+import { displayDate } from '../lib/format';
+const lang = 'en';
+const h = helpers();
+const P = h.P;
+const d = (iso: string) => displayDate(iso, 'en-GB');
+const path = route('method', lang);
+const description = 'How the invoice generator computes sales tax, VAT, GST, HST, PST and QST, rounds them, checks required invoice details, and its official sources, 2026.';
+const jsonLd = [webPageSchema({ name: 'Methodology', description, path, lang }), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Methodology', path }])];
+const srcRows = (Object.keys(SOURCES) as SourceKey[]).map((k) => {
+  const s = SOURCES[k];
+  return [`<a href="${s.url}" rel="nofollow noopener" target="_blank">${s.label}</a>`, d(s.read), s.via ? `<a href="${s.via}" rel="nofollow noopener" target="_blank">archived copy of the same page</a>` : 'read directly'];
+});
+const verified = US_STATES.filter((s) => s.status === 'verified').length;
+const usRows = US_STATES.map((s) => [s.name, s.hasStateTax ? h.pct(s.rate * 0.01) : 'none', s.local ? 'yes' : 'no', `<a href="${s.url}" rel="nofollow noopener" target="_blank">official page</a>`, s.status === 'verified' ? 'found on the page' : 'read by hand']);
+const caRows = PROVINCE_CODES.map((c) => { const p = PROVINCES[c]; return [p.name, p.kind === 'hst' ? `HST ${h.pct(p.hst ?? 0)}` : `GST ${h.pct(P.ca.gst)}`, p.pst ? `${p.pst_name} ${h.pct(p.pst)}` : 'none']; });
+const lastRef = BOE.reference_rates[BOE.reference_rates.length - 1];
+---
+<PageLayout title="Invoice Generator Methodology 2026: Tax Rules and Rounding" description={description} lang={lang} jsonLd={jsonLd} breadcrumbs={[{ label: 'Methodology' }]}>
+  <div class="prose prose-slate max-w-none">
+    <h1>How the generator works</h1>
+    <p>This page sets out what the invoice generator computes, from which official figures, how it was tested, and what it does not do. Every value quoted below is read from the parameter files that drive the generator, so this page cannot drift from it. The rates and rules were last read on <time datetime={P.retrieved_at}>{d(P.retrieved_at)}</time>.</p>
+
+    <h2>The line, the discount, the tax</h2>
+    <p>Each line is quantity times unit price, rounded to the cent. A discount on the invoice is a percentage taken off every line before tax, so the tax is always charged on what the customer actually pays. Shipping is a separate taxable amount, not discounted. When prices are entered tax included, the engine backs the net amount out of each line (one-sixth of a 20% VAT-inclusive price, one-eleventh of a 10% GST-inclusive price). The tax is then grouped by rate: one total per rate, and per tax where two taxes stack.</p>
+
+    <h2>Country by country</h2>
+    <h3>United States</h3>
+    <p>The state rate is the general sales tax rate of the state, from its revenue department or statute. The local rate is typed by the user for the delivery address, because local rates change by street and the states publish their own lookup tools. Lines marked "not taxable" carry no tax. The {verified} rates found automatically on the official page on {d(US_RETRIEVED)} are marked below; the others come from pages that block automated reading or do not print the rate as a number, and were read by hand on the same official sources.</p>
+    <h3>United Kingdom</h3>
+    <p>VAT at {h.pct(P.uk.vat_rates.standard)}, {h.pct(P.uk.vat_rates.reduced)} or {h.pct(0)} per line; exempt and outside-the-scope lines carry none. The total VAT is rounded down to the penny, the concession of VAT Notice 700, paragraph 17.5, for businesses that issue invoices. Under the domestic reverse charge the VAT is computed, printed and not added to the amount due, with the wording "{P.uk.reverse_charge_wordings[2]}". The CIS deduction ({h.pct(P.uk.cis.registered)}, {h.pct(P.uk.cis.unregistered)} or {h.pct(0)}) applies to the lines not marked as materials, net of VAT, as GOV.UK describes. Statutory late payment interest is {h.pct(P.uk.late_payment.margin)} over the Bank of England rate in force on 30 June or 31 December before interest starts; the weekly job reads the rate from the Bank's database, {h.pct(lastRef.base / 100, 2)} on {d(lastRef.reference_day)}. Daily interest is rounded to the penny before it is multiplied by the days, as in GOV.UK's worked example.</p>
+    <h3>Canada</h3>
+    <p>GST at {h.pct(P.ca.gst)} (Excise Tax Act, section 165) or HST at the provincial rate; PST in British Columbia and Saskatchewan, RST in Manitoba and QST in Quebec, each computed on the price before GST. A line can be marked "GST only" where the provincial tax does not apply. Each tax total is rounded to the cent. The compliance check follows section 3 of the Input Tax Credit Information Regulations, with its three bands at {h.money(P.ca.itc_tiers[0], 'CA')} and {h.money(P.ca.itc_tiers[1], 'CA')}, and Revenu Québec's table for the QST.</p>
+    <Fragment set:html={h.table(['Province or territory', 'Federal or harmonized', 'Provincial'], caRows, 'Rates applied in Canada (CRA table effective 1 April 2025)', ['l', 'l', 'l'])} />
+    <h3>Australia</h3>
+    <p>GST at {h.pct(P.au.gst)} on lines marked GST; GST-free and input-taxed lines carry none. The GST total is rounded to the nearest cent, half a cent up, as the ATO's rounding rules allow. When every taxable line carries exactly one-eleventh and prices are entered GST included, the invoice prints "Total price includes GST". The ABN is checked with the Australian Business Register's modulus 89 test. The checker asks for the buyer's identity or ABN from {h.money(P.au.buyer_identity_from, 'AU')}.</p>
+
+    <h2>The compliance checklist</h2>
+    <p>The checklist beside the preview compares what you have typed with the required details of the official text for your country, registration status and total. It reports what is present, what is missing and what is advisable. It does not verify that a tax number belongs to you or is registered (only the ABN has a published check digit; UK, Canadian and Quebec numbers are checked for format only), and it cannot judge whether a sale is taxable: that is the tax code you choose for each line.</p>
+
+    <h2>Tests</h2>
+    <p>The engine is covered by automated tests that run before every publication. Among them: HMRC's sample VAT invoice in VAT Notice 700/21 (net {h.money(245.6, 'UK', 2)}, VAT {h.money(49.12, 'UK', 2)}, total {h.money(294.72, 'UK', 2)}); the penny round-down on a {h.money(10.99, 'UK', 2)} line; GOV.UK's late payment example ({h.money(1000, 'UK')} at a 0.5% base rate for 50 days: {h.money(P.uk.late_payment.official_example.interest, 'UK', 2)}); the {h.money(40, 'UK')}, {h.money(70, 'UK')} and {h.money(100, 'UK')} compensation bands at their limits; GST and QST on {h.money(100, 'CA')} in Quebec ({h.money(5, 'CA')} and {h.money(9.98, 'CA', 2)}); one-eleventh GST on {h.money(110, 'AU')}; the ABR's example ABN 51 824 753 556; and the CIS deduction on labour only.</p>
+
+    <h2>Limits</h2>
+    <ul>
+      <li>The generator applies general rates. Special rates (US reduced rates on groceries, UK margin schemes, Canadian place-of-supply rules between provinces, Australian luxury car or wine taxes) are not modelled: choose the tax code that applies, or seek advice.</li>
+      <li>US local rates are typed by you. They depend on the exact address, and the state's own lookup tool is the reference.</li>
+      <li>It does not decide whether you must register for a tax, whether your customer is an end user for the reverse charge, or whether a supply is exempt.</li>
+      <li>It makes documents, not accounting records: keep a copy of each invoice you issue.</li>
+    </ul>
+
+    <h2>US state sources</h2>
+    <Fragment set:html={h.table(['State', 'State rate', 'Local taxes', 'Source', 'Rate check'], usRows, `General state sales tax rates, checked on ${d(US_RETRIEVED)}`, ['l', 'r', 'l', 'l', 'l'])} />
+
+    <h2>All sources</h2>
+    <Fragment set:html={h.table(['Source', 'Read on', 'How'], srcRows, 'Official sources of the parameter file', ['l', 'l', 'l'])} />
+  </div>
+</PageLayout>

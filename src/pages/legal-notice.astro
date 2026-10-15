@@ -1,0 +1,27 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import LegalIdentity from '../components/LegalIdentity.astro';
+import { AUTHOR_NAME, CONTACT_EMAIL, LAST_UPDATED, LEGAL, SITE_URL } from '../data/site-config';
+import { route } from '../i18n/routes';
+const lang = 'en';
+---
+<PageLayout title="Legal notice: publisher and host of the Tax Invoice Maker site" description="Publisher, hosting provider, limitation of liability and use of this independent invoice generator with US sales tax, UK VAT, Canadian GST/HST and Australian GST, 2026." lang={lang} noindex={true} breadcrumbs={[{ label: 'Legal notice' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Legal notice</h1>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+    <p>Publication director: {AUTHOR_NAME}, for the content published on {SITE_URL}.</p>
+    <h2>Host</h2>
+    <LegalIdentity mode="hosting" lang={lang} />
+    <h2>Nature of the service</h2>
+    <p>The site provides a free tool to prepare invoices, receipts, quotes and credit notes, applying the sales tax, VAT and GST rates and the invoice requirements published by the tax authorities of the United States, the United Kingdom, Canada and Australia. The documents are produced by the user, in the user's browser, under the user's responsibility. The site does not give legal, tax or accounting advice, does not decide whether a user must register for a tax, and is not affiliated with any government or with any accounting software. Method and limits: <a href={route('method', lang)}>methodology</a>.</p>
+    <h2>Liability</h2>
+    <p>Rates and rules are read at the source and the engine is tested, without any guarantee that no error remains. The publisher is not liable for an invoice issued, a tax charged or a claim made solely on the basis of the tool. Report errors through the <a href={route('contact', lang)}>contact page</a>.</p>
+    <h2>Reuse and embedding</h2>
+    <p>Texts and code remain the publisher's property; short quotations with a link are welcome. The invoices you create are yours. The generator can be embedded free of charge with its credit link visible: <a href={route('widget', lang)}>embed page</a>. Content quoted from government sites remains subject to the licence shown on those sites (for UK material, the Open Government Licence).</p>
+    <h2>Personal data</h2>
+    <p>The site sets no cookie and the publisher receives none of the data typed in the generator. See the <a href={route('privacy', lang)}>privacy policy</a> and the <a href={route('cookies', lang)}>cookies</a> page.</p>
+    <h2>Contact and governing law</h2>
+    <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. The publisher is established in {LEGAL.country}; French law applies, without prejudice to the mandatory consumer protections of your place of residence. Updated: {LAST_UPDATED}.</p>
+  </div>
+</PageLayout>

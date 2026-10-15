@@ -1,0 +1,72 @@
+---
+/**
+ * Renders a page defined in `src/content/pages/`. Order (RECETTE §5, §9.3, §21):
+ * tool page: H1, standfirst, the full generator, then the quotable block folded, then the body;
+ * guide / index: H1, standfirst, quotable block, mini-calculator, body.
+ * FAQ, related pages, sources and publisher box come from PageLayout, the FAQ displayed and marked up
+ * from the same list (§7).
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import MiniSim from './calc/MiniSim';
+import InvoiceGenerator from './calc/InvoiceGenerator';
+import Clamp from './Clamp.astro';
+import { route, ROUTES } from '../i18n/routes';
+import { label } from '../i18n/nav';
+import { t } from '../i18n/ui';
+import { pageById, PAGES } from '../lib/pages';
+import { helpers } from '../lib/helpers';
+import { SOURCES } from '../lib/engine/params';
+import { articleSchema, faqSchema, breadcrumbSchema, webPageSchema, webApplicationSchema } from '../lib/seo';
+import { AUTHOR_NAME } from '../data/site-config';
+import type { PageDef } from '../lib/page-types';
+import { resume as resumeOf, faqs as faqsOf } from '../lib/resolve';
+interface Props { page: PageDef }
+const { page } = Astro.props;
+const lang = 'en';
+const ui = t(lang);
+const path = page.path;
+const resumeText = resumeOf(page);
+const faqList = faqsOf(page);
+const parts = page.body(helpers()).split(/<!--mini:([A-Za-z0-9_]+)-->/);
+const crumbs: Array<{ label: string; href?: string }> = [];
+for (const g of ['templates', 'guides'] as const) {
+  if (page.group === g && page.kind !== 'index') { const ix = PAGES.find((p) => p.group === g && p.kind === 'index'); if (ix) crumbs.push({ label: ix.nav, href: route(ix.id, lang) }); }
+}
+crumbs.push({ label: page.nav });
+const jsonLd = [
+  page.tool ? webPageSchema({ name: page.h1, description: page.description, path, lang }) : articleSchema({ title: page.h1, description: page.description, path, lang }),
+  breadcrumbSchema([{ name: ui.breadcrumbHome, path: route('home', lang) }, ...crumbs.slice(0, -1).map((c) => ({ name: c.label, path: c.href! })), { name: page.nav, path }]),
+];
+if (!page.tool) jsonLd.push(webPageSchema({ name: page.h1, description: page.description, path, lang }));
+if (page.tool) jsonLd.push(webApplicationSchema({ name: page.h1, description: page.description, path, lang }));
+if (faqList.length) jsonLd.push(faqSchema(faqList, lang));
+const related = page.related.filter((id) => ROUTES.some((r) => r.id === id)).map((id) => ({ href: route(id, lang), name: label(id), description: pageById(id)?.card ?? 'The free invoice generator for the US, the UK, Canada and Australia.' }));
+const sources = page.sources.map((k) => ({ name: SOURCES[k].label, url: SOURCES[k].url }));
+const methodHref = route('method', lang);
+const target = page.miniHref ?? 'home';
+const miniHref = ROUTES.some((r) => r.id === target) && target !== page.id ? route(target, lang) : undefined;
+---
+<PageLayout title={page.title} description={page.description} lang={lang} jsonLd={jsonLd} faqs={faqList} related={related} sources={sources} breadcrumbs={crumbs}>
+  <article>
+    <header class="mb-4">
+      <h1 class="text-[1.75rem] font-bold text-navy-900 max-sm:leading-tight sm:text-3xl md:text-4xl">{page.h1}</h1>
+      <p class="mt-2 text-base text-navy-700 sm:text-lg">{page.intro}</p>
+    </header>
+    {page.tool ? (
+      <>
+        <div data-outil data-chrome class="mb-6"><InvoiceGenerator client:load country={page.tool.country} preset={page.tool.preset ?? 'standard'} methodHref={methodHref} /></div>
+        <Clamp text={resumeText} lang={lang} id={`clamp-${page.id}`} class="mb-4" />
+        <p class="mb-8 text-sm text-navy-600">{ui.reviewedBy} <a href={route('about', lang)} class="underline hover:text-navy-900">{AUTHOR_NAME}</a> · <a href={route('editorial', lang)} class="underline hover:text-navy-900">{ui.editorialPolicy}</a> · <a href={methodHref} class="underline hover:text-navy-900">{label('method')}</a></p>
+      </>
+    ) : (
+      <>
+        <Clamp text={resumeText} lang={lang} id={`clamp-${page.id}`} class="mb-3" />
+        {page.mini && <MiniSim client:load spacing="mb-4 mt-3" kind={page.mini} lang={lang} href={miniHref} />}
+        <p class="mb-8 text-sm text-navy-600">{ui.reviewedBy} <a href={route('about', lang)} class="underline hover:text-navy-900">{AUTHOR_NAME}</a> · <a href={route('editorial', lang)} class="underline hover:text-navy-900">{ui.editorialPolicy}</a> · <a href={methodHref} class="underline hover:text-navy-900">{label('method')}</a></p>
+      </>
+    )}
+    <div class="prose prose-slate max-w-none">
+      {parts.map((p, i) => i % 2 === 0 ? <Fragment set:html={p} /> : <div data-chrome data-simulateur-secondaire><MiniSim client:load kind={p} lang={lang} href={miniHref} /></div>)}
+    </div>
+  </article>
+</PageLayout>

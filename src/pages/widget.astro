@@ -1,0 +1,17 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { route } from '../i18n/routes';
+import { SITE_URL, SITE_NAMES } from '../data/site-config';
+const lang = 'en';
+const code = `<iframe src="${SITE_URL}/embed/invoice-generator/" title="Free invoice generator with sales tax, VAT and GST" width="100%" height="1500" style="border:0;max-width:1100px" loading="lazy"></iframe>\n<p><a href="${SITE_URL}/">Free invoice generator by ${SITE_NAMES[lang]}</a></p>`;
+---
+<PageLayout title="Embed the free invoice generator on your website, 2026" description="Free iframe of the invoice generator for accountants, freelancer communities, chambers of commerce and forums: sales tax, VAT and GST by country, nothing stored, credit link." lang={lang} noindex={true} breadcrumbs={[{ label: 'Embed' }]}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Embed the invoice generator</h1>
+    <p>Copy this code into your page. The generator updates itself when a rate changes; you have nothing to maintain. Your visitors' invoices are built in their own browser, so nothing passes through your site or ours.</p>
+    <pre class="whitespace-pre-wrap text-sm"><code>{code}</code></pre>
+    <h2>Conditions</h2>
+    <ul><li>Free, for any site, commercial or not.</li><li>Keep the credit link under the frame visible.</li><li>Do not present the tool as tax advice or as your own software.</li></ul>
+    <p>Preview: <a href="/embed/invoice-generator/">open the embedded version</a>. Questions: <a href={route('contact', lang)}>contact</a>.</p>
+  </div>
+</PageLayout>

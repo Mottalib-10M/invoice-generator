@@ -1,0 +1,20 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import LegalIdentity from '../components/LegalIdentity.astro';
+import { route } from '../i18n/routes';
+import { CONTACT_EMAIL } from '../data/site-config';
+import { contactPageSchema } from '../lib/seo';
+const lang = 'en';
+const d = 'Report a tax rate or an invoice rule that looks wrong, ask about embedding the invoice generator, or reach the publisher. Rate reports get a reply within five working days.';
+---
+<PageLayout title="Contact Tax Invoice Maker: report a rate or embed the generator" description={d} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Contact', description: d, path: route('contact', lang), lang })]} breadcrumbs={[{ label: 'Contact' }]}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Contact</h1>
+    <p>Email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <p>To report a tax figure or a required invoice detail that you think is wrong, send the page address, the country and state or province you chose, the amounts you typed and, if you have it, the page of HMRC, the CRA, Revenu Québec, the ATO or the state revenue department that says otherwise. We check it against that page and reply within five working days.</p>
+    <p>Please do not send us real invoices or customer details: we do not need them, and the generator never sends them to us either. We cannot tell you whether you must register for VAT, GST or sales tax, or review your bookkeeping; an accountant or the tax authority can.</p>
+    <p>Putting the generator on your own site is free: the code is on the <a href={route('widget', lang)}>embed page</a>.</p>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+  </div>
+</PageLayout>
