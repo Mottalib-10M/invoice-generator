@@ -49,7 +49,7 @@ ${h.table(['Total of the invoice', 'What it must show'], [
   [`${h.money(t1, 'CA')} to ${h.money(t2 - 0.01, 'CA', 2)}`, 'The above, plus your GST/HST registration number and the tax (or a statement that the price includes it)'],
   [`${h.money(t2, 'CA')} or more`, 'The above, plus the customer\'s name, the terms of payment and a description of each supply'],
 ], 'Required details by amount (SOR/91-45, section 3)', ['l', 'l'])}
-<p>The checklist beside the preview reads your total and switches band as you type. Your registration number is checked for its format: nine digits, the letters RT and a four-digit reference, such as 123456789 RT0001. The ${h.a('gst-hst-invoice-requirements', 'GST/HST invoice requirements guide')} goes through each item.</p>
+<p>The checklist beside the preview reads your total and switches band as you type. Your registration number is checked for its shape, nine digits, the letters RT and a four-digit reference, such as 123456782 RT0001, and its nine-digit business number is tested with the ${h.src('cra_bn_check', 'check digit formula of the Canada Revenue Agency')}, so a mistyped digit is flagged before the invoice goes out. The ${h.a('gst-hst-invoice-requirements', 'GST/HST invoice requirements guide')} goes through each item.</p>
 <h2>Quebec: the QST has its own rules</h2>
 <p>Revenu Québec administers both the GST and the QST in Quebec, and its table is stricter than the federal one: the QST amount and a description are required at any amount, and from ${h.money(t1, 'CA')} the invoice must show both your GST and your QST registration numbers. When you pick Quebec, the generator adds a field for the QST number and prints the two taxes on separate lines, ${h.pct(h.P.ca.gst)} and ${h.pct(PROVINCES.QC.pst ?? 0)}. The ${h.a('quebec-invoice-template', 'Quebec invoice template')} is ready filled for a Montreal business.</p>
 <h2>Prices with tax included</h2>
@@ -58,5 +58,5 @@ ${h.table(['Total of the invoice', 'What it must show'], [
 <p>You may invoice without GST/HST while you are a small supplier, that is while your taxable supplies stay at or below ${h.money(h.P.ca.small_supplier, 'CA')} in a calendar quarter and over the four preceding quarters. Revenu Québec applies the same limit for the QST. Above it, registration is required and every taxable invoice carries the tax. The ${h.a('gst-hst-pst-by-province', 'province by province guide')} covers the provincial registrations that PST and RST require.</p>`;
   },
   related: ['gst-hst-invoice-requirements', 'gst-hst-pst-by-province', 'quebec-invoice-template', 'consulting-invoice-template', 'payment-terms', 'deposit-invoice'],
-  sources: ['ca_rates', 'ca_itc_regs', 'ca_eta', 'rq_invoices', 'bc_pst', 'mb_rst', 'sk_pst'],
+  sources: ['ca_rates', 'ca_itc_regs', 'ca_eta', 'rq_invoices', 'bc_pst', 'mb_rst', 'sk_pst', 'cra_bn_check'],
 });

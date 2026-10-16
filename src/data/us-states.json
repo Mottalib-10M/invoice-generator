@@ -1,6 +1,6 @@
 {
- "retrieved_at": "2026-10-15",
- "source": "State revenue departments (DOR) and state statutes, one official URL per state",
+ "retrieved_at": "2026-10-16",
+ "source": "State revenue departments (DOR), state statutes and legislative publications: one official URL per state, read automatically",
  "states": [
   {
    "code": "AL",
@@ -11,7 +11,18 @@
    "url": "https://www.revenue.alabama.gov/sales-use/state-sales-use-tax-rates/",
    "lookup": "https://www.alabamainteractive.org/ador_taxrate_lookup/welcome.action",
    "status": "verified",
-   "checked": "2026-10-15"
+   "read_from": "https://www.revenue.alabama.gov/sales-use/state-sales-use-tax-rates/",
+   "excerpt": "Tax Rates Sales and Use Tax Rates (§§ 40-23-2, 40-23-37, 40-23-61, and 40-23-63, Code of Ala. 1975) General: 4% Food/Grocery, Effective 9/1/2025: 2% Food/Grocery",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Food and grocery items: 2% state rate since 1 September 2025 (general rate 4%)",
+     "url": "https://www.revenue.alabama.gov/sales-use/state-sales-use-tax-rates/",
+     "status": "verified",
+     "excerpt": "-37, 40-23-61, and 40-23-63, Code of Ala. 1975) General: 4% Food/Grocery, Effective 9/1/2025: 2% Food/Grocery, Effective 09/1/2023-8/31/",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "AK",
@@ -22,7 +33,9 @@
    "url": "https://www.akleg.gov/basis/statutes.asp?media=print&secStart=29.45.650&secEnd=29.45.650",
    "lookup": "https://arsstc.org/buyers/",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.akleg.gov/basis/statutes.asp?media=print&secStart=29.45.650&secEnd=29.45.650",
+   "excerpt": "cept as provided in AS 04.21.010 (c), AS 29.45.750 , and in (f), (h), (i), (j), (k), and (l) of this section, a borough may levy and collect a sales tax on sales, rents, and services provided in the bor"
   },
   {
    "code": "AZ",
@@ -30,10 +43,12 @@
    "rate": 5.6,
    "hasStateTax": true,
    "local": true,
-   "url": "https://azdor.gov/business/transaction-privilege-tax",
+   "url": "https://azdor.gov/sites/default/files/document/TPT_RATETABLE_10012026.pdf",
    "lookup": "https://aztaxes.gov/Home/Address/",
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://web.archive.org/web/2026id_/https://azdor.gov/sites/default/files/document/TPT_RATETABLE_10012026.pdf",
+   "excerpt": "6.10% 6.70% 6.60% 6.35% 6.712% 6.10% .056% .0672% 015 Contracting– Prime 6.60% 6.90% 6.60% 6.60% 6.60% 6.30% 5.60% 6.43% 6.10% 6.70% 6.60% 6.35% 6.712% 6.10% .056%"
   },
   {
    "code": "AR",
@@ -44,7 +59,9 @@
    "url": "https://www.dfa.arkansas.gov/office/taxes/excise-tax-administration/sales-use-tax/sales-and-use-tax-faqs/",
    "lookup": "https://www.dfa.arkansas.gov/office/taxes/excise-tax-administration/sales-use-tax/local-tax-lookup-tools/",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.dfa.arkansas.gov/office/taxes/excise-tax-administration/sales-use-tax/sales-and-use-tax-faqs/",
+   "excerpt": ". What is the Use Tax rate? Effective July 1, 2013. The state Use Tax rate is the same as the Sales Tax rate, 6.500%. In addition, you are required to remit the city"
   },
   {
    "code": "CA",
@@ -55,7 +72,9 @@
    "url": "https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm",
    "lookup": "https://maps.cdtfa.ca.gov/",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm",
+   "excerpt": "October 1, 2026 Excel Version 2012 (xlsx) Excel Version 97-2003 (xls) Tax Districts The statewide tax rate is 7.25%. In most areas of California, local jurisdictions"
   },
   {
    "code": "CO",
@@ -63,10 +82,12 @@
    "rate": 2.9,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.colorado.gov/DR1002",
+   "url": "https://tax.colorado.gov/sales-tax-guide",
    "lookup": "https://salestaxlookup.colorado.gov/",
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://tax.colorado.gov/sales-tax-guide",
+   "excerpt": "ations Part 3: Calculation of Tax Part 3: Calculation of Tax Colorado state sales tax is imposed at a rate of 2.9%. Any sale made in Colorado may also be subject to"
   },
   {
    "code": "CT",
@@ -77,7 +98,9 @@
    "url": "https://portal.ct.gov/drs/sales-tax/tax-information",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://portal.ct.gov/drs/sales-tax/tax-information",
+   "excerpt": "Tax Return , for the reporting period in which the taxable purchase was made. Tax Rates The sales tax rate of 6.35% applies to the retail sale, lease, or rental of m"
   },
   {
    "code": "DE",
@@ -88,7 +111,9 @@
    "url": "https://revenuefiles.delaware.gov/docs/gr_rates.pdf",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://revenuefiles.delaware.gov/docs/gr_rates.pdf",
+   "excerpt": "re not proratable and the full amount must be paid. [1] Grocery Supermarkets - the tax rate is .003267 on all taxable gross receipts. [2] Hotels, Motels and Tourist Homes - The eight"
   },
   {
    "code": "DC",
@@ -99,7 +124,9 @@
    "url": "https://otr.cfo.dc.gov/page/sales-and-use-tax-faqs",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://otr.cfo.dc.gov/page/sales-and-use-tax-faqs",
+   "excerpt": "ners: The increase in the general sales tax rate to 7% has been postponed. The general sales tax rate remains 6% through September 30, 2027. The September 2026 re"
   },
   {
    "code": "FL",
@@ -110,7 +137,9 @@
    "url": "https://floridarevenue.com/taxes/taxesfees/Pages/sales_tax.aspx",
    "lookup": "https://pointmatch.floridarevenue.com/Default.aspx",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://floridarevenue.com/taxes/taxesfees/Pages/sales_tax.aspx",
+   "excerpt": "s or services and collected from the purchaser at the time of sale. Florida's general state sales tax rate is 6% with the following exceptions: Retail sales of ne"
   },
   {
    "code": "GA",
@@ -118,10 +147,12 @@
    "rate": 4,
    "hasStateTax": true,
    "local": true,
-   "url": "https://dor.georgia.gov/sales-use-tax",
+   "url": "https://dor.georgia.gov/document/document/httpsdorgeorgiagovdocumentdocumentgeneral-rate-chart-effective-october-1-2026/download",
    "lookup": "https://dor.georgia.gov/sales-tax-rates-general",
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://dor.georgia.gov/document/document/httpsdorgeorgiagovdocumentdocumentgeneral-rate-chart-effective-october-1-2026/download",
+   "excerpt": "GEORGIA SALES AND USE TAX RATE CHART Code 000 - The state sales and use tax rate of 4% is included in all jurisdictions other than 803 F"
   },
   {
    "code": "HI",
@@ -129,10 +160,12 @@
    "rate": 4,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.hawaii.gov/geninfo/countysurcharge/",
+   "url": "https://tax.hawaii.gov/geninfo/get/",
    "lookup": "https://tax.hawaii.gov/geninfo/countysurcharge/",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://tax.hawaii.gov/geninfo/get/",
+   "excerpt": "n, 0.5% for Wholesaling, Manufacturing, Producing, Wholesale Services, and Use Tax on Imports For Resale, and 4% for all others. To learn more about the differenc"
   },
   {
    "code": "ID",
@@ -140,10 +173,12 @@
    "rate": 6,
    "hasStateTax": true,
    "local": true,
-   "url": "https://web.archive.org/web/20260923002217/https://tax.idaho.gov/taxes/sales-use/sales-tax/local-sales-tax/city-sales-tax/",
+   "url": "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH36/SECT63-3619/",
    "lookup": null,
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://web.archive.org/web/20260317094737id_/https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH36/SECT63-3619/",
+   "excerpt": "d rate of the sales tax. An excise tax is hereby imposed upon each sale at retail at the rate of six percent (6%) of the sales price of all retail sales subject t"
   },
   {
    "code": "IL",
@@ -151,10 +186,12 @@
    "rate": 6.25,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.illinois.gov/research/taxinformation/sales/rot.html",
+   "url": "https://tax.illinois.gov/questionsandanswers/139.html",
    "lookup": "https://mytax.illinois.gov/?Link=TaxRateFinder",
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://tax.illinois.gov/questionsandanswers/139.html",
+   "excerpt": "red withheld? Answer Answer Page Content Illinois' general state retailers' occupation and use tax rates are: 6.25 percent on general merchandise, including items required"
   },
   {
    "code": "IN",
@@ -165,7 +202,9 @@
    "url": "https://www.in.gov/dor/business-tax/sales-tax/",
    "lookup": "https://www.in.gov/dor/i-am-a/business-corp/county-tax-information",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.in.gov/dor/business-tax/sales-tax/",
+   "excerpt": "es Tax If your business sells goods or tangible personal property, you&rsquo;ll need to register to collect a seven percent sales tax. This registration allows you to legall"
   },
   {
    "code": "IA",
@@ -176,7 +215,9 @@
    "url": "https://tax.iowa.gov/taxes/tax-guidance/general/iowa-taxfee-descriptions-and-rates",
    "lookup": "https://tax-mapper.iowa.gov/",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://tax.iowa.gov/taxes/tax-guidance/general/iowa-taxfee-descriptions-and-rates",
+   "excerpt": "erated) services. Iowa law allows for numerous exemptions based on the item sold or the purchaser. Tax Rate : 6% Distribution of Funds : State General Fund Due Da"
   },
   {
    "code": "KS",
@@ -184,10 +225,21 @@
    "rate": 6.5,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.kslegislature.gov/b2025_26/laws/012_000_0000_chapter/012_001_0000_article/012_001_0089_section/012_001_0089_k/",
+   "url": "https://www.kslegislature.gov/li/b2025_26/statute/079_000_0000_chapter/079_036_0000_article/079_036_0003_section/079_036_0003_k/",
    "lookup": null,
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "read_from": "https://www.kslegislature.gov/li/b2025_26/statute/079_000_0000_chapter/079_036_0000_article/079_036_0003_section/079_036_0003_k/",
+   "excerpt": "ces taxable under this act, there is hereby levied and there shall be collected and paid a tax at the rate of 6.5%. On and after January 1, 2023, 17% and on and aft",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Food and food ingredients: 0% state rate since 1 January 2025 (most prepared food excluded); local taxes still apply",
+     "url": "https://www.kslegislature.gov/li/b2025_26/statute/079_000_0000_chapter/079_036_0000_article/079_036_0003d_section/079_036_0003d_k/",
+     "status": "verified",
+     "excerpt": ") commencing on January 1, 2024, at the rate of 2%; and (3) commencing on January 1, 2025, and thereafter, at the rate of 0%. (b) The provisions of this section sha",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "KY",
@@ -198,7 +250,9 @@
    "url": "https://revenue.ky.gov/Business/Sales-Use-Tax/Pages/default.aspx",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://revenue.ky.gov/Business/Sales-Use-Tax/Pages/default.aspx",
+   "excerpt": "ch Disaster Relief: Sale​​s and Use Tax FAQs (05/27/25) ​Kentucky Sales and Use Tax is imposed at the rate of 6 percent of gross receipts or purchase price. There are no"
   },
   {
    "code": "LA",
@@ -206,10 +260,12 @@
    "rate": 5,
    "hasStateTax": true,
    "local": true,
-   "url": "https://legis.la.gov/Legis/Law.aspx?d=206501",
+   "url": "https://revenue.louisiana.gov/tax-education-and-faqs/faqs/sales-tax/what-is-the-sales-tax-rate-in-louisiana",
    "lookup": null,
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://revenue.louisiana.gov/tax-education-and-faqs/faqs/sales-tax/what-is-the-sales-tax-rate-in-louisiana",
+   "excerpt": "id Authorization Numbers ; 5.00% Interstate Telecommunications; 5.00% Business Utilities ; 2.00% (boiler fuel 5%) Sales and use taxes levied by political subdivis"
   },
   {
    "code": "ME",
@@ -220,7 +276,18 @@
    "url": "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/Business%20Guide%20for%20December%202025%20FINAL.pdf",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "read_from": "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/Business%20Guide%20for%20December%202025%20FINAL.pdf",
+   "excerpt": "ing services formerly subject to the Service Provider Tax (“SPT”) will be subject to sales tax at the rate of 5.5%: cable and satellite television or radio services",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Grocery staples for human consumption: exempt",
+     "url": "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/Business%20Guide%20for%20December%202025%20FINAL.pdf",
+     "status": "verified",
+     "excerpt": "es of the following kinds of tangible personal property are exempt from sales tax:  grocery staples for human consumption;  prescription medicines for humans (d",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "MD",
@@ -228,10 +295,12 @@
    "rate": 6,
    "hasStateTax": true,
    "local": false,
-   "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtg&section=11-102&enactments=false",
+   "url": "https://www.marylandcomptroller.gov/content/dam/mdcomp/tax/instructions/Tax_rate_chart.pdf",
    "lookup": null,
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://www.marylandcomptroller.gov/content/dam/mdcomp/tax/instructions/Tax_rate_chart.pdf",
+   "excerpt": "Comptroller of Maryland Maryland Sales and Use Tax 6% RATE CHART For information, contact Taxpayer Serv"
   },
   {
    "code": "MA",
@@ -239,10 +308,21 @@
    "rate": 6.25,
    "hasStateTax": true,
    "local": false,
-   "url": "https://www.mass.gov/guides/sales-tax-on-meals",
+   "url": "https://www.mass.gov/guides/sales-and-use-tax",
    "lookup": null,
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "read_from": "https://www.mass.gov/guides/sales-and-use-tax",
+   "excerpt": "s × Show More Table of contents top Table of Contents You skipped the table of contents section. Introduction 6.25% of the sales price or rental charge Sales tax The",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Food for home consumption (not restaurant meals) and clothing up to $175 per item: exempt",
+     "url": "https://www.mass.gov/guides/sales-and-use-tax",
+     "status": "verified",
+     "excerpt": "erally exempted from the sales/use tax: Food &amp; clothing Sales of food for human consumption (other than meals sold by a restaurant) and clothing costing $175 or less . For items that cost more than $175, s",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "MI",
@@ -252,8 +332,10 @@
    "local": false,
    "url": "https://www.michigan.gov/taxes/business-taxes/sales-use-tax",
    "lookup": null,
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://web.archive.org/web/2026id_/https://www.michigan.gov/taxes/business-taxes/sales-use-tax",
+   "excerpt": "Individuals or businesses that sell tangible personal property to the final consumer are required to remit a 6% sales tax on the total price of their taxable ret"
   },
   {
    "code": "MN",
@@ -261,10 +343,12 @@
    "rate": 6.875,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.revenue.state.mn.us/local-sales-tax-information",
+   "url": "https://www.revenue.state.mn.us/sites/default/files/2026-03/FS156.pdf",
    "lookup": "https://www.revenue.state.mn.us/sales-tax-rate-calculator",
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://www.revenue.state.mn.us/sites/default/files/2026-03/FS156.pdf",
+   "excerpt": "finition Use tax is the counterpart to sales tax. Minnesota’s use tax rate is the same as the sales tax rate (6.875%, though local taxes may also apply) and has the s"
   },
   {
    "code": "MS",
@@ -275,7 +359,9 @@
    "url": "https://www.dor.ms.gov/business/sales-and-use-tax/tourism-and-economic-development-taxes",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.dor.ms.gov/business/sales-and-use-tax/tourism-and-economic-development-taxes",
+   "excerpt": "sales or gross income of the business derived from any of the activities taxed at the rate of seven percent (7%) or more under the Mississippi Sales Tax Law, Sec"
   },
   {
    "code": "MO",
@@ -283,10 +369,12 @@
    "rate": 4.225,
    "hasStateTax": true,
    "local": true,
-   "url": "https://revisor.mo.gov/main/OneSection.aspx?section=144.014",
+   "url": "https://dor.mo.gov/taxation/business/tax-types/sales-use/",
    "lookup": null,
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://web.archive.org/web/2026id_/https://dor.mo.gov/taxation/business/tax-types/sales-use/",
+   "excerpt": "etail. Use tax is imposed on the storage, use or consumption of tangible personal property in this state. The 4.225 percent state sales and use tax is distributed into four"
   },
   {
    "code": "MT",
@@ -297,7 +385,9 @@
    "url": "https://mtrevenue.gov/taxes/miscellaneous/local-resort-tax",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://mtrevenue.gov/taxes/miscellaneous/local-resort-tax",
+   "excerpt": "ear-and-tear on local infrastructure without overburdening local citizens. What the Resort Tax Applies To The resort tax is a sales tax that applies to: Hotels, motels, and other lodgin"
   },
   {
    "code": "NE",
@@ -308,7 +398,9 @@
    "url": "https://revenue.nebraska.gov/about/frequently-asked-questions/nebraska-sales-and-use-tax-faqs",
    "lookup": "https://revenue.nebraska.gov/businesses/local-sales-and-use-tax-rates",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://revenue.nebraska.gov/about/frequently-asked-questions/nebraska-sales-and-use-tax-faqs",
+   "excerpt": "es and Returns What are the sales and use tax rates in Nebraska? The Nebraska state sales and use tax rate is 5.5%. In addition, local sales and use taxes can be se"
   },
   {
    "code": "NV",
@@ -319,7 +411,9 @@
    "url": "https://tax.nv.gov/wp-content/uploads/2024/12/Components-of-Sales-Tax.pdf",
    "lookup": "https://tax.nv.gov/wp-content/uploads/2024/05/ADM-T047-State-Sales-Tax-Map.pdf",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://tax.nv.gov/wp-content/uploads/2024/12/Components-of-Sales-Tax.pdf",
+   "excerpt": "COMPONENTS OF SALES AND USE TAX RATES Components of 6.85% Minimum Statewide Tax Rate: RATE NRS PROVISION DE"
   },
   {
    "code": "NH",
@@ -327,10 +421,12 @@
    "rate": 0,
    "hasStateTax": false,
    "local": false,
-   "url": "https://www.revenue.nh.gov/taxes-glance",
+   "url": "https://www.revenue.nh.gov/resource-center/frequently-asked-questions/general-information",
    "lookup": null,
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://web.archive.org/web/20251001141507id_/https://www.revenue.nh.gov/resource-center/frequently-asked-questions/general-information",
+   "excerpt": "How do I get to the Department? Map and driving directions. Does New Hampshire have a sales tax? No, there is no general sales tax on goods purchased in New Hampshire. How do I get"
   },
   {
    "code": "NJ",
@@ -341,7 +437,18 @@
    "url": "https://www.nj.gov/treasury/taxation/pdf/pubs/sales/su4.pdf",
    "lookup": "https://www.nj.gov/treasury/taxation/salestax.shtml",
    "status": "verified",
-   "checked": "2026-10-15"
+   "read_from": "https://www.nj.gov/treasury/taxation/pdf/pubs/sales/su4.pdf",
+   "excerpt": "price, including any delivery/shipping charges. The Use Tax rate is the same as the Sales Tax rate, which is 6.625%. No Sales Tax Paid. If no Sales Tax is paid on a",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Most grocery food and most clothing and footwear: exempt",
+     "url": "https://www.nj.gov/treasury/taxation/pdf/pubs/sales/su4.pdf",
+     "status": "verified",
+     "excerpt": "s are taxable unless they are specifically exempted by law. Exempt items include most food sold as grocery items, most clothing and footwear, disposable paper products for househol",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "NM",
@@ -349,10 +456,12 @@
    "rate": 4.875,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.tax.newmexico.gov/businesses/gross-receipts-overview/",
+   "url": "https://www.tax.newmexico.gov/governments/municipal-county-governments/local-option-taxes/",
    "lookup": "https://www.tax.newmexico.gov/governments/gross-receipts-location-code-and-tax-rate-map/",
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://www.tax.newmexico.gov/governments/municipal-county-governments/local-option-taxes/",
+   "excerpt": "es at the same time and in the same manner as state gross receipts tax. Generally speaking, the state rate of 4.875% is the base. The county’s portion, if any, is add"
   },
   {
    "code": "NY",
@@ -363,7 +472,9 @@
    "url": "https://www.tax.ny.gov/bus/st/rates.htm",
    "lookup": "https://www.tax.ny.gov/bus/st/rates.htm",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.tax.ny.gov/bus/st/rates.htm",
+   "excerpt": "N/RATE LOOKUP BY ADDRESS Sales tax rates The combined sales and use tax rate equals the state rate (currently 4%) plus any local tax rate imposed by a city, count"
   },
   {
    "code": "NC",
@@ -371,10 +482,12 @@
    "rate": 4.75,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.ncdor.gov/taxes-forms/sales-and-use-tax/sales-and-use-tax-bulletins",
+   "url": "https://www.ncdor.gov/current-sales-and-use-tax-rates",
    "lookup": "https://www.ncdor.gov/taxes-forms/sales-and-use-tax/sales-and-use-tax-rates/current-sales-and-use-tax-rates",
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://www.ncdor.gov/current-sales-and-use-tax-rates",
+   "excerpt": "les and Use Tax Sales and Use Tax Rates Current Sales and Use Tax Rates Listed below by county are the total (4.75% state rate plus applicable local and transit rate"
   },
   {
    "code": "ND",
@@ -385,7 +498,9 @@
    "url": "https://www.tax.nd.gov/sales-and-use-tax",
    "lookup": "https://tap.tax.nd.gov/?link=RateLookup",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.tax.nd.gov/sales-and-use-tax",
+   "excerpt": "seller. North Dakota sales tax is comprised of 2 parts: State Sales Tax – The North Dakota sales tax rate is 5% for most retail sales. Gross receipts tax is appl"
   },
   {
    "code": "OH",
@@ -396,7 +511,9 @@
    "url": "https://tax.ohio.gov/wps/portal/gov/tax/business/ohio-business-taxes/sales-and-use",
    "lookup": "https://tax.ohio.gov/help-center/the-finder",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://tax.ohio.gov/wps/portal/gov/tax/business/ohio-business-taxes/sales-and-use",
+   "excerpt": "mall increments (multiples of 0.05%) up to a maximum of 3 percent. When combined with the state rate—which is 5.75 percent—the overall tax rate (state, local, and transit)"
   },
   {
    "code": "OK",
@@ -407,7 +524,9 @@
    "url": "https://oklahoma.gov/tax/businesses/sales-use-tax.html",
    "lookup": "https://taxproject.csa.ou.edu/Rate_Locator",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://oklahoma.gov/tax/businesses/sales-use-tax.html",
+   "excerpt": "nicipality that also levies a sales tax, those taxes will be applied as well. Oklahoma sales tax is levied at 4.5% of the gross receipts from the sale or rental of"
   },
   {
    "code": "OR",
@@ -415,10 +534,12 @@
    "rate": 0,
    "hasStateTax": false,
    "local": false,
-   "url": "https://www.oregon.gov/dor/programs/businesses/Pages/lodging.aspx",
+   "url": "https://www.oregon.gov/dor/programs/businesses/Pages/Corporate-Activity-Tax.aspx",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.oregon.gov/dor/programs/businesses/Pages/Corporate-Activity-Tax.aspx",
+   "excerpt": "er January 1, 2020. The CAT is imposed on taxpayers for the privilege of doing business in Oregon. The CAT is not a transactional tax, such as a retail sales tax, nor is it an income tax. Oregon's CAT is measure"
   },
   {
    "code": "PA",
@@ -429,7 +550,18 @@
    "url": "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforbusinesses/sut/documents/rev-717.pdf",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "read_from": "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforbusinesses/sut/documents/rev-717.pdf",
+   "excerpt": "g, delivery, or installation. Separately stated charges for returnable containers are not subject to tax. The 6 percent state Sales Tax is to be collected on every separ",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Grocery store food and everyday clothing: exempt (formal apparel and sporting clothing are taxable)",
+     "url": "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforbusinesses/sut/documents/rev-717.pdf",
+     "status": "verified",
+     "excerpt": "s or medical supplies ( See Category 19, Page 19.) • Coal • Grocery store food • Water • Returnable corrugated boxes used to deliver snack food products when purchased by a manufacturer • Wearing apparel, except formal apparel, sporting goods, and clothing and real",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "RI",
@@ -440,7 +572,18 @@
    "url": "https://rules.sos.ri.gov/regulations/Part/280-20-70-4",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "read_from": "https://rules.sos.ri.gov/regulations/Part/280-20-70-4",
+   "excerpt": "ises. B. The one percent (1%) local meals and beverage tax is to be separately stated from the seven percent (7%) state sales tax on the sales check or other proo",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Food and food ingredients bought for human consumption: exempt",
+     "url": "https://rules.sos.ri.gov/regulations/Part/280-20-70-4",
+     "status": "verified",
+     "excerpt": "Meal Services Generally Under R.I. Gen. Laws § 44-18-30(9), the sale of food and food ingredients purchased for human consumption is exempt from sales tax. 4.11 Items Not Included as Food or Foo",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "SC",
@@ -451,7 +594,9 @@
    "url": "https://dor.sc.gov/sales-use-tax-index/local-sales-taxes",
    "lookup": "https://rfa.maps.arcgis.com/apps/instant/lookup/index.html?appid=689fd82b343045988251f0cbad8f1620",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://dor.sc.gov/sales-use-tax-index/local-sales-taxes",
+   "excerpt": "Search Terms Local Sales Taxes Home Sales &amp; Use Tax Index Local Sales Taxes In addition to the statewide 6% Sales Tax, counties and municipalities can impose"
   },
   {
    "code": "SD",
@@ -462,7 +607,9 @@
    "url": "https://dor.sd.gov/businesses/taxes/sales-use-tax/",
    "lookup": "https://sdgis.sd.gov/portal/apps/experiencebuilder/experience/?id=09f9b73eff74481fb2e12de719662b8f",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://dor.sd.gov/businesses/taxes/sales-use-tax/",
+   "excerpt": "erty or any product transferred electronically, and the sale of services. The state sales and use tax rate is 4.2%. For additional information on sales tax, please"
   },
   {
    "code": "TN",
@@ -473,7 +620,18 @@
    "url": "https://revenue.support.tn.gov/hc/en-us/articles/360058139672-SUT-13-Sales-and-Use-Tax-Rates-Overview",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "read_from": "https://revenue.support.tn.gov/hc/en-us/articles/360058139672-SUT-13-Sales-and-Use-Tax-Rates-Overview",
+   "excerpt": "w SUT-13 - Sales and Use Tax Rates – Overview The state sales tax rate for most taxable items and services is 7%. However, there are exceptions. For example, sale",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Food and food ingredients: 4% state rate; prepared food, candy, dietary supplements, alcohol and tobacco stay at 7%",
+     "url": "https://revenue.support.tn.gov/hc/en-us/articles/360058139672-SUT-13-Sales-and-Use-Tax-Rates-Overview",
+     "status": "verified",
+     "excerpt": "is 7%. However, there are exceptions. For example, sales of food and food ingredients are taxed at a state rate of 4%. Prepared food, dietary supplements, candy, alcoholic beverages, and tobacco continue to be subject to the general state sales and use tax rate of 7%, plus the applicable local tax rate. Al",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "TX",
@@ -484,7 +642,9 @@
    "url": "https://comptroller.texas.gov/taxes/sales/",
    "lookup": "https://gis.cpa.texas.gov/search/",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://comptroller.texas.gov/taxes/sales/",
+   "excerpt": "ady when you call . For more information, see our Call Tips and Peak Schedule . close &#8864; Texas imposes a 6.25 percent state sales and use tax on all retail sales, leas"
   },
   {
    "code": "UT",
@@ -492,10 +652,21 @@
    "rate": 4.85,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.utah.gov/forms-pubs/pubs/pub-25/",
+   "url": "https://tax.utah.gov/forms-pubs/pub-25/",
    "lookup": "https://tap.tax.utah.gov/TaxExpress/_/",
-   "status": "blocked",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "read_from": "https://www.utah.gov/pmn/files/1348679.pdf",
+   "excerpt": "ted in the chart. Chart 2: Taxes in the Combined Rate Tax Imposed By Rate ExempƟons State Sales and Use State 4.85% The state sales tax rate for grocery food is 1.75",
+   "checked": "2026-10-16",
+   "special": [
+    {
+     "note": "Grocery food: 1.75% state rate, 3% combined everywhere in Utah",
+     "url": "https://www.utah.gov/pmn/files/1348679.pdf",
+     "status": "verified",
+     "excerpt": "posed By Rate ExempƟons State Sales and Use State 4.85% The state sales tax rate for grocery food is 1.75 percent. These transacƟons are also subject to local opƟon and county opƟon and results in a total combined rate on grocery food of 3 percent throughout Utah. The state sales tax ra",
+     "checked": "2026-10-16"
+    }
+   ]
   },
   {
    "code": "VT",
@@ -506,7 +677,9 @@
    "url": "https://tax.vermont.gov/business/local-option-tax",
    "lookup": "https://vcgi.maps.arcgis.com/apps/instant/lookup/index.html?appid=ec6d6af106f14e408731de6063883021",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://tax.vermont.gov/business/local-option-tax",
+   "excerpt": "rental of motor vehicles which are subject to the motor vehicle purchase and use tax. Local Option Sales Tax: 6% sales tax + 1% = 7% total tax Local Option Meals"
   },
   {
    "code": "VA",
@@ -514,12 +687,14 @@
    "rate": 4.3,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.tax.virginia.gov/retail-sales-and-use-tax",
+   "url": "https://law.lis.virginia.gov/vacode/title58.1/chapter6/section58.1-603/",
    "lookup": "https://rrpl.maps.arcgis.com/apps/instant/lookup/index.html?appid=2c27121c640a4926ae4286cdd3eb5e78",
    "minLocal": 1.0,
    "localNote": "A 1% local tax applies everywhere in Virginia, so the lowest combined rate is 5.3%; some regions add more.",
-   "status": "not_found",
-   "checked": "2026-10-15"
+   "status": "verified",
+   "checked": "2026-10-16",
+   "read_from": "https://law.lis.virginia.gov/vacode/title58.1/chapter6/section58.1-603/",
+   "excerpt": "y as defined in this chapter, or who leases or rents such property within this Commonwealth, in the amount of 4.3 percent: 1. Of the gross sales price of each item or arti"
   },
   {
    "code": "WA",
@@ -530,7 +705,9 @@
    "url": "https://dor.wa.gov/taxes-rates/retail-sales-tax",
    "lookup": "https://webgis.dor.wa.gov/taxratelookup/SalesTax.aspx",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://dor.wa.gov/taxes-rates/retail-sales-tax",
+   "excerpt": "tax rate The sales tax is comprised of two parts: a state portion and a local portion. The state tax rate is 6.5%. The local tax rate varies by city and/or county."
   },
   {
    "code": "WV",
@@ -541,7 +718,9 @@
    "url": "https://tax.wv.gov/Business/SalesAndUseTax/MunicipalSalesAndUseTax/Pages/MunicipalSalesAndUseTax.aspx",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://tax.wv.gov/Business/SalesAndUseTax/MunicipalSalesAndUseTax/Pages/MunicipalSalesAndUseTax.aspx",
+   "excerpt": "nuary 1, 2026 Municipal Rate&#58; 1% Combined Rate&#58; 7% * The combined rate is the state sales tax rate of 6% plus the municipality’s rate of tax. Who is requi"
   },
   {
    "code": "WI",
@@ -552,7 +731,9 @@
    "url": "https://www.revenue.wi.gov/Pages/FAQS/pcs-taxrates.aspx",
    "lookup": "https://www.revenue.wi.gov/Pages/Apps/strb.aspx",
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://www.revenue.wi.gov/Pages/FAQS/pcs-taxrates.aspx",
+   "excerpt": "onsin Form 1NPR instructions for further details. 2. What is the sales tax rate? The Wisconsin sales tax is a 5% tax imposed on the sales price of retailers who s"
   },
   {
    "code": "WY",
@@ -563,7 +744,9 @@
    "url": "https://wyoleg.gov/statutes/compress/title39.pdf",
    "lookup": null,
    "status": "verified",
-   "checked": "2026-10-15"
+   "checked": "2026-10-16",
+   "read_from": "https://wyoleg.gov/statutes/compress/title39.pdf",
+   "excerpt": "s if the tax rate under subsection (a) of this section was increased from three percent (3%) to four percent (4%). The revenue from these increases shall be distr"
   }
  ]
 }

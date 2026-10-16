@@ -255,6 +255,11 @@
       "label": "Input Tax Credit Information (GST/HST) Regulations, SOR/91-45, section 3",
       "read": "2026-10-15"
     },
+    "cra_bn_check": {
+      "url": "https://bac-lac.wayback.archive-it.org/web/20061210041004/http:/www.cra-arc.gc.ca/eservices/magmedia/sin-e.pdf",
+      "label": "Canada Revenue Agency: validating a SIN, formula that also validates the first nine digits of a Business Number (copy kept by Library and Archives Canada)",
+      "read": "2026-10-16"
+    },
     "ca_eta": {
       "url": "https://laws-lois.justice.gc.ca/eng/acts/E-15/FullText.html",
       "label": "Excise Tax Act, R.S.C. 1985, c. E-15, section 165 (GST at 5%)",
@@ -270,13 +275,13 @@
       "url": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/showing-the-taxes/",
       "label": "Revenu Québec: showing the GST and QST",
       "read": "2026-10-15",
-      "via": "https://web.archive.org/web/20250325091543/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/showing-the-taxes/"
+      "via": "https://web.archive.org/web/20250810103215/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/showing-the-taxes/"
     },
     "rq_small": {
       "url": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/registering-for-the-gst-and-qst/small-suppliers/",
       "label": "Revenu Québec: small suppliers ($30,000)",
       "read": "2026-10-15",
-      "via": "https://web.archive.org/web/20250120093325/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/registering-for-the-gst-and-qst/small-suppliers/"
+      "via": "https://web.archive.org/web/20250915100037/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/registering-for-the-gst-and-qst/small-suppliers/"
     },
     "bc_pst": {
       "url": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/pst",
@@ -304,6 +309,16 @@
       "label": "Australian Taxation Office: registering for GST ($75,000 threshold)",
       "read": "2026-10-15",
       "via": "https://web.archive.org/web/20261007014616/https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst"
+    },
+    "bga_invoicing": {
+      "url": "https://business.gov.au/finance/payments-and-invoicing/invoicing",
+      "label": "business.gov.au (Australian Government): how to invoice, tax invoice above $82.50 and within 28 days of a request",
+      "read": "2026-10-16"
+    },
+    "bga_gst_register": {
+      "url": "https://business.gov.au/registrations/register-for-taxes/register-for-goods-and-services-tax-gst",
+      "label": "business.gov.au (Australian Government): register for GST ($75,000, non-profit $150,000)",
+      "read": "2026-10-16"
     },
     "au_gst_act": {
       "url": "https://www.legislation.gov.au/C2004A00446/latest/text",

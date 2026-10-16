@@ -5,7 +5,7 @@
  */
 import { P, PROVINCES, type Country, type SourceKey, type ProvinceCode } from './params';
 import type { InvoiceResult } from './invoice';
-import { abnValid, ukVatFormatValid, caBnValid, qstValid } from './ids';
+import { abnValid, ukVatFormatValid, caBnValid, caBnFormatValid, caBnCheckDigitValid, qstValid } from './ids';
 
 export type DocKind = 'invoice' | 'proforma' | 'quote' | 'receipt' | 'credit_note';
 
@@ -90,7 +90,7 @@ export function checkInvoice(doc: InvoiceDoc, r: InvoiceResult): { title: string
     push('issue', 'Invoice date', has(doc.issueDate), 'ca_itc_regs');
     push('total', 'Total amount paid or payable', total > 0, 'ca_itc_regs');
     if (doc.registered) {
-      if (tier >= 2) push('bn', 'Your GST/HST registration number', caBnValid(doc.seller.taxId ?? ''), 'ca_itc_regs', has(doc.seller.taxId) && !caBnValid(doc.seller.taxId!) ? 'Format: 9 digits followed by RT and 4 digits, e.g. 123456789 RT0001' : `Required from $${t1}`);
+      if (tier >= 2) push('bn', 'Your GST/HST registration number', caBnValid(doc.seller.taxId ?? ''), 'ca_itc_regs', has(doc.seller.taxId) && !caBnFormatValid(doc.seller.taxId!) ? 'Format: 9 digits followed by RT and 4 digits, e.g. 123456782 RT0001' : has(doc.seller.taxId) && !caBnCheckDigitValid(doc.seller.taxId!) ? 'The 9-digit business number fails the CRA check digit: check for a mistyped digit' : `Required from $${t1}`);
       if (qc && tier >= 2) push('qst', 'Your QST registration number', qstValid(doc.seller.qstNo ?? ''), 'rq_invoices', 'Format: 10 digits, TQ and 4 digits');
       if (tier >= 2 || qc) push('taxamt', qc && tier === 1 ? 'Amount of QST (required at any amount in Quebec)' : 'Amount of tax, or a statement that the price includes it', true, qc ? 'rq_invoices' : 'ca_itc_regs');
     }

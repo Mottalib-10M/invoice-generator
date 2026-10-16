@@ -34,6 +34,7 @@ export default definePage({
     { q: 'How do I correct the sales tax on an invoice I already sent?', a: 'Issue a credit memo for the original invoice and a new invoice with the right rate, rather than editing and resending the same number. Both documents keep the audit trail clear: the credit memo cancels the tax you overcharged or undercharged, and the new invoice shows the correct state and local rate. The generator\'s credit note option prints "Credit memo" for the US.' },
   ],
   body: (h) => {
+    const specialRows = US_STATES.flatMap((s) => (s.special ?? []).filter((x) => x.status === 'verified').map((x) => [s.name, x.note, `<a href="${x.url}" rel="nofollow noopener" target="_blank">${new URL(x.url).hostname.replace(/^www\./, '')}</a>`]));
     const rows = US_STATES.map((s) => [
       s.name,
       s.hasStateTax ? h.pct(s.rate / 100) : 'none',
@@ -62,8 +63,11 @@ export default definePage({
 <p>When a customer has paid a deposit, the tax is still computed on the full taxable price of the invoice and the deposit is deducted from the total. On a ${h.money(2400, 'US')} order of custom shelving in Washington with a ${h.pct(0.036, 1)} local rate and ${h.money(500, 'US')} paid up front, the invoice shows ${h.money(dep.tax, 'US', 2)} of tax and a balance due of ${h.money(dep.due, 'US', 2)}; the ${h.a('deposit-invoice', 'deposit invoice guide')} covers billing the deposit itself. To correct a rate after sending, issue a credit memo and a new invoice. The generator rounds the tax to the nearest cent on the invoice total for the taxable lines.</p>
 
 <h2>All 51 jurisdictions and their sources</h2>
-<p>Each general rate below was read on the page of the state's revenue department or in its statute; the scheduled check of ${h.date(US_RETRIEVED, 'US')} found ${US_STATES.filter((s) => s.status === 'verified').length} of them automatically on that page, and the methodology page lists the result for every state. Reduced rates on food or other goods, and special taxes on lodging, vehicles or meals, are not in this table: an invoice for those needs the specific rate from the state.</p>
+<p>Each general rate below was read on the page of the state's revenue department or in its statute; the scheduled check of ${h.date(US_RETRIEVED, 'US')} found ${US_STATES.filter((s) => s.status === 'verified').length} of them automatically on that page, and the methodology page lists the result for every state. Special taxes on lodging, vehicles or meals are not in this table; the most frequent reduced rates and exemptions on food and clothing follow it.</p>
 ${h.table(['State', 'General state rate', 'Local taxes', 'Official source', 'Local rate lookup'], rows, `General state sales tax rates used by the generator, checked on ${h.date(US_RETRIEVED, 'US')}`, ['l', 'r', 'l', 'l', 'l'])}
+<h2>Food and clothing: frequent reduced rates and exemptions</h2>
+<p>Several states tax grocery food at a lower rate, or exempt grocery food and clothing. The cases below are read on the state's own text by the same weekly check; the generator still applies the general rate, so mark exempt lines "not taxable" and check a reduced rate with the state before invoicing it. A state that is not listed may still have exemptions of its own.</p>
+${h.table(['State', 'Reduced rate or exemption', 'Official source'], specialRows, `Reduced rates and exemptions on food and clothing, checked on ${h.date(US_RETRIEVED, 'US')}`, ['l', 'l', 'l'])}
 <p>For the full generator with these rates built in, use the ${h.a('invoice-generator-usa', 'US invoice generator')}; contractors who split labor and materials can start from the ${h.a('contractor-invoice-template', 'contractor invoice template')}.</p>`;
   },
   related: ['invoice-generator-usa', 'contractor-invoice-template', 'deposit-invoice', 'credit-note-template', 'estimate-template'],

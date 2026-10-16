@@ -64,7 +64,7 @@ const SAMPLE: Record<Country, { seller: Seller; buyer: Party; payment: string; l
     lines: [{ desc: 'Website design, 3 pages', qty: 1, price: 1200, tax: 'standard' }, { desc: 'Hosting, 12 months', qty: 12, price: 15, tax: 'standard' }],
   },
   CA: {
-    seller: { name: 'Maple Ridge Consulting Inc.', address: '100 King St W, Suite 5600\nToronto, ON M5X 1C9', email: 'invoices@example.ca', taxId: '123456789 RT0001', qstNo: '' },
+    seller: { name: 'Maple Ridge Consulting Inc.', address: '100 King St W, Suite 5600\nToronto, ON M5X 1C9', email: 'invoices@example.ca', taxId: '123456782 RT0001', qstNo: '' },
     buyer: { name: 'Lakeshore Outfitters Ltd.', address: '250 Queens Quay W\nToronto, ON M5J 2N2', taxId: '' },
     payment: 'Interac e-Transfer to invoices@example.ca\nor EFT: transit 00000, institution 000, account 0000000',
     lines: [{ desc: 'Process review and recommendations', qty: 12, price: 150, tax: 'ca_full' }, { desc: 'Workshop materials', qty: 1, price: 240, tax: 'ca_full' }],

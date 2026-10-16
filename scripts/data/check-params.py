@@ -8,11 +8,12 @@ Une page fermée aux robots (ATO, Revenu Québec, canada.ca selon le réseau) es
 capture web.archive.org (`via`). Code de sortie 1 si une valeur n'est plus trouvée sur une page
 lue : c'est le signal qu'un taux ou un seuil a changé et que params-2026.json doit être relu.
 """
-import json, os, re, sys, time, datetime, urllib.request
+import gzip, json, os, re, sys, time, datetime, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 P = json.load(open(os.path.join(ROOT, 'src/data/params-2026.json')))
-UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36'
+# Deux en-têtes : certains pare-feu refusent le navigateur simulé et acceptent l'outil, ou l'inverse.
+UAS = ['curl/8.7.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36']
 
 # Clé de source → expressions qui doivent figurer sur la page (valeurs du moteur).
 EXPECT = {
@@ -28,6 +29,7 @@ EXPECT = {
     'uk_late_costs': [r'£40', r'£70', r'£100', r'£999\.99', r'£9,999\.99'],
     'uk_late_rate_order': [r'8 per cent per annum', r'30th June', r'31st December'],
     'ca_itc_regs': [r'less than \$100', r'\$100 or more and less than \$500', r'terms of payment'],
+    'cra_bn_check': [r'first nine digits of a Business Number', r'Subtract from the next highest number ending in zero'],
     'ca_eta': [r'rate of 5% on the value of the consideration'],
     'rq_invoices': [r'\$500 or more', r'Terms of payment', r'GST and QST registration numbers'],
     'rq_small': [r'\$30,000'],
@@ -35,13 +37,30 @@ EXPECT = {
     'mb_rst': [r'7%'],
     'ato_tax_invoices': [r'\$82\.50', r'\$1,000', r'7 details', r'Total price includes GST', r'28 days'],
     'ato_register': [r'\$75,000', r'\$150,000'],
+    # business.gov.au (gouvernement australien) se lit directement : mêmes seuils que l'ATO.
+    'bga_invoicing': [r'\$82\.50', r'28 days'],
+    'bga_gst_register': [r'\$75,000', r'\$150,000', r'total price includes GST'],
     'abr_abn_format': [r'modulus 89', r'51 824 753 556'],
 }
 
 
+def raw(url: str) -> bytes:
+    last = None
+    for ua in UAS:
+        try:
+            b = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': ua, 'Accept-Language': 'en'}), timeout=60).read()
+            return gzip.decompress(b) if b[:2] == b'\x1f\x8b' else b  # captures web.archive.org gzip
+        except Exception as e:
+            last = e
+    raise last
+
+
 def text(url: str) -> str:
-    req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept-Language': 'en'})
-    t = urllib.request.urlopen(req, timeout=60).read().decode('utf-8', 'ignore')
+    b = raw(url)
+    if b[:4] == b'%PDF':  # PDF officiel (CRA) : texte extrait avec pypdf
+        import io, pypdf
+        return re.sub(r'\s+', ' ', ' '.join((p.extract_text() or '') for p in pypdf.PdfReader(io.BytesIO(b)).pages))
+    t = b.decode('utf-8', 'ignore')
     t = re.sub(r'<(script|style)[\s\S]*?</\1>', ' ', t)
     t = re.sub(r'<[^>]+>', ' ', t).replace('&nbsp;', ' ').replace('&#160;', ' ').replace('&pound;', '£').replace('&#163;', '£')
     return re.sub(r'\s+', ' ', t)

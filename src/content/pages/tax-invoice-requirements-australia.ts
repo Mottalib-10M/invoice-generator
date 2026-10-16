@@ -59,5 +59,5 @@ ${h.table(['Sale, GST included', 'GST inside (one-eleventh)', 'Tax invoice if th
 <p>Check the ABN digits: the ${h.src('abr_abn_format', 'Australian Business Register check')} catches a mistyped number, and the generator runs it as you type. Check the date, because the issue date is one of the seven details and an undated invoice is not a tax invoice. Check the total against the ${h.money(h.P.au.buyer_identity_from, 'AU')} line and add the buyer if needed. Then keep your copy. Registration itself, at ${h.money(h.P.au.registration_threshold, 'AU')} of GST turnover (${h.money(h.P.au.nfp_threshold, 'AU')} for non-profit bodies), is explained on the ${h.src('ato_register', 'ATO registration page')}, and the ${h.a('tax-invoice-generator-australia', 'Australian tax invoice generator')} builds the document with all of the above.</p>`;
   },
   related: ['tax-invoice-generator-australia', 'invoice-without-gst-template', 'receipt-template', 'how-to-write-an-invoice', 'invoice-numbering'],
-  sources: ['ato_tax_invoices', 'ato_register', 'abr_abn_format', 'au_gst_act'],
+  sources: ['ato_tax_invoices', 'ato_register', 'abr_abn_format', 'au_gst_act', 'bga_invoicing', 'bga_gst_register'],
 });

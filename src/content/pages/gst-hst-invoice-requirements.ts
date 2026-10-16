@@ -53,7 +53,7 @@ ${h.table(['Detail', `Under ${h.money(t1, 'CA')}`, `${h.money(t1, 'CA')} to ${h.
 <h3>Under $100</h3>
 <p>Coffee, parking, a small part. The regulations ask little, but a receipt that only shows a card number and a total, with no supplier name, still fails. In Quebec, the QST amount must be visible even here, so a single "taxes included" line without the QST figure does not support an input tax refund.</p>
 <h3>From $100</h3>
-<p>The registration number is where most corrected invoices start. It is the business number followed by the program identifier and reference, in the form 123456789 RT0001, and the checklist flags a number that does not have that shape. The tax also has to be shown, either as an amount or through the inclusive statement described below. When some lines are taxable and others are not, the invoice must indicate the status of each taxable supply, which is what the per-line tax code in the generator prints.</p>
+<p>The registration number is where most corrected invoices start. It is the business number followed by the program identifier and reference, in the form 123456782 RT0001, and the checklist flags a number that does not have that shape or whose business number fails the ${h.src('cra_bn_check', 'CRA check digit')}. The tax also has to be shown, either as an amount or through the inclusive statement described below. When some lines are taxable and others are not, the invoice must indicate the status of each taxable supply, which is what the per-line tax code in the generator prints.</p>
 <h3>From $500</h3>
 <p>Here the customer's name, the terms of payment and a description sufficient to identify each supply become compulsory. Freelancers who send a short "for services, October" invoice to a corporate client are the usual casualties: the accounts payable team cannot support the credit and asks for a new one.</p>
 <h2>Showing the tax: separately or included</h2>
@@ -68,5 +68,5 @@ ${h.table(['Price before tax', 'HST', 'Total', 'Band', 'Details required'], ex, 
 <p>The rate you charge depends on the province of the supply, from ${h.pct(h.P.ca.gst)} GST in Alberta to ${h.pct(0.15)} HST in the Atlantic provinces, with PST, RST or QST added in four provinces. The ${h.a('gst-hst-pst-by-province', 'GST, HST and PST by province guide')} gives every rate and computes them, and the ${h.a('quebec-invoice-template', 'Quebec invoice template')} starts with both registration numbers in place.</p>`;
   },
   related: ['invoice-generator-canada', 'gst-hst-pst-by-province', 'quebec-invoice-template', 'how-to-write-an-invoice', 'invoice-numbering'],
-  sources: ['ca_itc_regs', 'rq_invoices', 'rq_showing', 'rq_small', 'ca_rates'],
+  sources: ['ca_itc_regs', 'rq_invoices', 'rq_showing', 'rq_small', 'ca_rates', 'cra_bn_check'],
 });

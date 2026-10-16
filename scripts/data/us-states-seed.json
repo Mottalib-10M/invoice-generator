@@ -1,5 +1,5 @@
 {
- "_lisezmoi": "Graine des taux d'\u00c9tat (taxe de vente g\u00e9n\u00e9rale). Chaque taux et chaque URL d'administration fiscale d'\u00c9tat (DOR) sont rev\u00e9rifi\u00e9s par scripts/data/verify-us-rates.py, qui t\u00e9l\u00e9charge la page officielle et y cherche le taux ; le r\u00e9sultat dat\u00e9 va dans src/data/us-states.json.",
+ "_lisezmoi": "Graine des taux d'État (taxe de vente générale). Par État : le taux, l'URL officielle affichée (url) et, si elle ferme la porte aux robots, d'autres sources officielles lisibles (alt : PDF du même organisme, statut, publication de la législature, capture web.archive.org datée). expect = phrase attendue pour un État sans taxe d'État. scripts/data/verify-us-rates.py lit chaque source, y cherche le taux et écrit le résultat daté (read_from, excerpt) dans src/data/us-states.json. Les 17 taux confirmés jusque-là à la main ont été relus à la source le 2026-10-16.",
  "states": [
   {
    "code": "AL",
@@ -8,7 +8,14 @@
    "hasStateTax": true,
    "local": true,
    "url": "https://www.revenue.alabama.gov/sales-use/state-sales-use-tax-rates/",
-   "lookup": "https://www.alabamainteractive.org/ador_taxrate_lookup/welcome.action"
+   "lookup": "https://www.alabamainteractive.org/ador_taxrate_lookup/welcome.action",
+   "special": [
+    {
+     "note": "Food and grocery items: 2% state rate since 1 September 2025 (general rate 4%)",
+     "url": "https://www.revenue.alabama.gov/sales-use/state-sales-use-tax-rates/",
+     "expect": "Food/Grocery, Effective 9/1/2025: 2%"
+    }
+   ]
   },
   {
    "code": "AK",
@@ -17,7 +24,8 @@
    "hasStateTax": false,
    "local": true,
    "url": "https://www.akleg.gov/basis/statutes.asp?media=print&secStart=29.45.650&secEnd=29.45.650",
-   "lookup": "https://arsstc.org/buyers/"
+   "lookup": "https://arsstc.org/buyers/",
+   "expect": "a borough may levy and collect a sales tax"
   },
   {
    "code": "AZ",
@@ -25,8 +33,12 @@
    "rate": 5.6,
    "hasStateTax": true,
    "local": true,
-   "url": "https://azdor.gov/business/transaction-privilege-tax",
-   "lookup": "https://aztaxes.gov/Home/Address/"
+   "url": "https://azdor.gov/sites/default/files/document/TPT_RATETABLE_10012026.pdf",
+   "lookup": "https://aztaxes.gov/Home/Address/",
+   "alt": [
+    "https://web.archive.org/web/2026id_/https://azdor.gov/sites/default/files/document/TPT_RATETABLE_10012026.pdf",
+    "https://www.azjlbc.gov/revenues/25taxbk.pdf"
+   ]
   },
   {
    "code": "AR",
@@ -52,8 +64,11 @@
    "rate": 2.9,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.colorado.gov/DR1002",
-   "lookup": "https://salestaxlookup.colorado.gov/"
+   "url": "https://tax.colorado.gov/sales-tax-guide",
+   "lookup": "https://salestaxlookup.colorado.gov/",
+   "alt": [
+    "https://tax.colorado.gov/consumer-use-tax-guide"
+   ]
   },
   {
    "code": "CT",
@@ -71,7 +86,8 @@
    "hasStateTax": false,
    "local": false,
    "url": "https://revenuefiles.delaware.gov/docs/gr_rates.pdf",
-   "lookup": null
+   "lookup": null,
+   "expect": "taxable gross receipts"
   },
   {
    "code": "DC",
@@ -97,8 +113,11 @@
    "rate": 4,
    "hasStateTax": true,
    "local": true,
-   "url": "https://dor.georgia.gov/sales-use-tax",
-   "lookup": "https://dor.georgia.gov/sales-tax-rates-general"
+   "url": "https://dor.georgia.gov/document/document/httpsdorgeorgiagovdocumentdocumentgeneral-rate-chart-effective-october-1-2026/download",
+   "lookup": "https://dor.georgia.gov/sales-tax-rates-general",
+   "alt": [
+    "https://dor.georgia.gov/document/document/carrier-locomotive-fuel-rate-chart-effective-july-1-2026-through-september-30/download"
+   ]
   },
   {
    "code": "HI",
@@ -106,8 +125,11 @@
    "rate": 4,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.hawaii.gov/geninfo/countysurcharge/",
-   "lookup": "https://tax.hawaii.gov/geninfo/countysurcharge/"
+   "url": "https://tax.hawaii.gov/geninfo/get/",
+   "lookup": "https://tax.hawaii.gov/geninfo/countysurcharge/",
+   "alt": [
+    "https://tax.hawaii.gov/geninfo/countysurcharge/"
+   ]
   },
   {
    "code": "ID",
@@ -115,8 +137,11 @@
    "rate": 6,
    "hasStateTax": true,
    "local": true,
-   "url": "https://web.archive.org/web/20260923002217/https://tax.idaho.gov/taxes/sales-use/sales-tax/local-sales-tax/city-sales-tax/",
-   "lookup": null
+   "url": "https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH36/SECT63-3619/",
+   "lookup": null,
+   "alt": [
+    "https://web.archive.org/web/20260317094737id_/https://legislature.idaho.gov/statutesrules/idstat/Title63/T63CH36/SECT63-3619/"
+   ]
   },
   {
    "code": "IL",
@@ -124,7 +149,7 @@
    "rate": 6.25,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.illinois.gov/research/taxinformation/sales/rot.html",
+   "url": "https://tax.illinois.gov/questionsandanswers/139.html",
    "lookup": "https://mytax.illinois.gov/?Link=TaxRateFinder"
   },
   {
@@ -151,8 +176,18 @@
    "rate": 6.5,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.kslegislature.gov/b2025_26/laws/012_000_0000_chapter/012_001_0000_article/012_001_0089_section/012_001_0089_k/",
-   "lookup": null
+   "url": "https://www.kslegislature.gov/li/b2025_26/statute/079_000_0000_chapter/079_036_0000_article/079_036_0003_section/079_036_0003_k/",
+   "lookup": null,
+   "alt": [
+    "https://klrd.gov/2026/03/02/briefing-book-2026-sales-tax-exemptions/"
+   ],
+   "special": [
+    {
+     "note": "Food and food ingredients: 0% state rate since 1 January 2025 (most prepared food excluded); local taxes still apply",
+     "url": "https://www.kslegislature.gov/li/b2025_26/statute/079_000_0000_chapter/079_036_0000_article/079_036_0003d_section/079_036_0003d_k/",
+     "expect": "commencing on January 1, 2025, and thereafter, at the rate of 0%"
+    }
+   ]
   },
   {
    "code": "KY",
@@ -169,8 +204,11 @@
    "rate": 5,
    "hasStateTax": true,
    "local": true,
-   "url": "https://legis.la.gov/Legis/Law.aspx?d=206501",
-   "lookup": null
+   "url": "https://revenue.louisiana.gov/tax-education-and-faqs/faqs/sales-tax/what-is-the-sales-tax-rate-in-louisiana",
+   "lookup": null,
+   "alt": [
+    "https://dam.ldr.la.gov/lawspolicies/RIB%2025-007%20-%20State%20Sales%20Tax%20Rate.pdf"
+   ]
   },
   {
    "code": "ME",
@@ -179,7 +217,14 @@
    "hasStateTax": true,
    "local": false,
    "url": "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/Business%20Guide%20for%20December%202025%20FINAL.pdf",
-   "lookup": null
+   "lookup": null,
+   "special": [
+    {
+     "note": "Grocery staples for human consumption: exempt",
+     "url": "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/Business%20Guide%20for%20December%202025%20FINAL.pdf",
+     "expect": "exempt from sales tax:\\s*\\W?\\s*grocery staples for human consumption"
+    }
+   ]
   },
   {
    "code": "MD",
@@ -187,7 +232,7 @@
    "rate": 6,
    "hasStateTax": true,
    "local": false,
-   "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtg&section=11-102&enactments=false",
+   "url": "https://www.marylandcomptroller.gov/content/dam/mdcomp/tax/instructions/Tax_rate_chart.pdf",
    "lookup": null
   },
   {
@@ -196,8 +241,18 @@
    "rate": 6.25,
    "hasStateTax": true,
    "local": false,
-   "url": "https://www.mass.gov/guides/sales-tax-on-meals",
-   "lookup": null
+   "url": "https://www.mass.gov/guides/sales-and-use-tax",
+   "lookup": null,
+   "alt": [
+    "https://www.mass.gov/guides/sales-tax-on-meals"
+   ],
+   "special": [
+    {
+     "note": "Food for home consumption (not restaurant meals) and clothing up to $175 per item: exempt",
+     "url": "https://www.mass.gov/guides/sales-and-use-tax",
+     "expect": "Sales of food for human consumption \\(other than meals sold by a restaurant\\) and clothing costing \\$175 or less"
+    }
+   ]
   },
   {
    "code": "MI",
@@ -206,7 +261,11 @@
    "hasStateTax": true,
    "local": false,
    "url": "https://www.michigan.gov/taxes/business-taxes/sales-use-tax",
-   "lookup": null
+   "lookup": null,
+   "alt": [
+    "https://web.archive.org/web/2026id_/https://www.michigan.gov/taxes/business-taxes/sales-use-tax",
+    "https://sfa.senate.michigan.gov/Chart/Posters/MichiganRevenuePoster.pdf"
+   ]
   },
   {
    "code": "MN",
@@ -214,8 +273,11 @@
    "rate": 6.875,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.revenue.state.mn.us/local-sales-tax-information",
-   "lookup": "https://www.revenue.state.mn.us/sales-tax-rate-calculator"
+   "url": "https://www.revenue.state.mn.us/sites/default/files/2026-03/FS156.pdf",
+   "lookup": "https://www.revenue.state.mn.us/sales-tax-rate-calculator",
+   "alt": [
+    "https://www.revenue.state.mn.us/sites/default/files/2026-08/local-sales-and-use-tax-rate-guide-2026-q4.pdf"
+   ]
   },
   {
    "code": "MS",
@@ -232,8 +294,12 @@
    "rate": 4.225,
    "hasStateTax": true,
    "local": true,
-   "url": "https://revisor.mo.gov/main/OneSection.aspx?section=144.014",
-   "lookup": null
+   "url": "https://dor.mo.gov/taxation/business/tax-types/sales-use/",
+   "lookup": null,
+   "alt": [
+    "https://web.archive.org/web/2026id_/https://dor.mo.gov/taxation/business/tax-types/sales-use/",
+    "https://senate.mo.gov/FiscalNotes/2025-1/0803S.01I.ORG.pdf"
+   ]
   },
   {
    "code": "MT",
@@ -242,7 +308,8 @@
    "hasStateTax": false,
    "local": true,
    "url": "https://mtrevenue.gov/taxes/miscellaneous/local-resort-tax",
-   "lookup": null
+   "lookup": null,
+   "expect": "resort tax is a sales tax"
   },
   {
    "code": "NE",
@@ -268,8 +335,12 @@
    "rate": 0,
    "hasStateTax": false,
    "local": false,
-   "url": "https://www.revenue.nh.gov/taxes-glance",
-   "lookup": null
+   "url": "https://www.revenue.nh.gov/resource-center/frequently-asked-questions/general-information",
+   "lookup": null,
+   "alt": [
+    "https://web.archive.org/web/20251001141507id_/https://www.revenue.nh.gov/resource-center/frequently-asked-questions/general-information"
+   ],
+   "expect": "no general sales tax"
   },
   {
    "code": "NJ",
@@ -278,7 +349,14 @@
    "hasStateTax": true,
    "local": false,
    "url": "https://www.nj.gov/treasury/taxation/pdf/pubs/sales/su4.pdf",
-   "lookup": "https://www.nj.gov/treasury/taxation/salestax.shtml"
+   "lookup": "https://www.nj.gov/treasury/taxation/salestax.shtml",
+   "special": [
+    {
+     "note": "Most grocery food and most clothing and footwear: exempt",
+     "url": "https://www.nj.gov/treasury/taxation/pdf/pubs/sales/su4.pdf",
+     "expect": "Exempt items include most food sold as grocery items, most clothing and footwear"
+    }
+   ]
   },
   {
    "code": "NM",
@@ -286,7 +364,7 @@
    "rate": 4.875,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.tax.newmexico.gov/businesses/gross-receipts-overview/",
+   "url": "https://www.tax.newmexico.gov/governments/municipal-county-governments/local-option-taxes/",
    "lookup": "https://www.tax.newmexico.gov/governments/gross-receipts-location-code-and-tax-rate-map/"
   },
   {
@@ -304,7 +382,7 @@
    "rate": 4.75,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.ncdor.gov/taxes-forms/sales-and-use-tax/sales-and-use-tax-bulletins",
+   "url": "https://www.ncdor.gov/current-sales-and-use-tax-rates",
    "lookup": "https://www.ncdor.gov/taxes-forms/sales-and-use-tax/sales-and-use-tax-rates/current-sales-and-use-tax-rates"
   },
   {
@@ -340,8 +418,12 @@
    "rate": 0,
    "hasStateTax": false,
    "local": false,
-   "url": "https://www.oregon.gov/dor/programs/businesses/Pages/lodging.aspx",
-   "lookup": null
+   "url": "https://www.oregon.gov/dor/programs/businesses/Pages/Corporate-Activity-Tax.aspx",
+   "lookup": null,
+   "alt": [
+    "https://www.oregon.gov/dor/programs/businesses/Pages/lodging.aspx"
+   ],
+   "expect": "not a transactional tax, such as a retail sales tax"
   },
   {
    "code": "PA",
@@ -350,7 +432,14 @@
    "hasStateTax": true,
    "local": true,
    "url": "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforbusinesses/sut/documents/rev-717.pdf",
-   "lookup": null
+   "lookup": null,
+   "special": [
+    {
+     "note": "Grocery store food and everyday clothing: exempt (formal apparel and sporting clothing are taxable)",
+     "url": "https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/formsandpublications/formsforbusinesses/sut/documents/rev-717.pdf",
+     "expect": "Grocery store food.{0,150}Wearing apparel, except formal apparel"
+    }
+   ]
   },
   {
    "code": "RI",
@@ -359,7 +448,14 @@
    "hasStateTax": true,
    "local": false,
    "url": "https://rules.sos.ri.gov/regulations/Part/280-20-70-4",
-   "lookup": null
+   "lookup": null,
+   "special": [
+    {
+     "note": "Food and food ingredients bought for human consumption: exempt",
+     "url": "https://rules.sos.ri.gov/regulations/Part/280-20-70-4",
+     "expect": "the sale of food and food ingredients purchased for human consumption is exempt from sales tax"
+    }
+   ]
   },
   {
    "code": "SC",
@@ -386,7 +482,14 @@
    "hasStateTax": true,
    "local": true,
    "url": "https://revenue.support.tn.gov/hc/en-us/articles/360058139672-SUT-13-Sales-and-Use-Tax-Rates-Overview",
-   "lookup": null
+   "lookup": null,
+   "special": [
+    {
+     "note": "Food and food ingredients: 4% state rate; prepared food, candy, dietary supplements, alcohol and tobacco stay at 7%",
+     "url": "https://revenue.support.tn.gov/hc/en-us/articles/360058139672-SUT-13-Sales-and-Use-Tax-Rates-Overview",
+     "expect": "food and food ingredients are taxed at a state rate of 4%\\. Prepared food, dietary supplements, candy, alcoholic beverages, and tobacco continue to be subject to the general state sales and use tax rate of 7%"
+    }
+   ]
   },
   {
    "code": "TX",
@@ -403,8 +506,19 @@
    "rate": 4.85,
    "hasStateTax": true,
    "local": true,
-   "url": "https://tax.utah.gov/forms-pubs/pubs/pub-25/",
-   "lookup": "https://tap.tax.utah.gov/TaxExpress/_/"
+   "url": "https://tax.utah.gov/forms-pubs/pub-25/",
+   "lookup": "https://tap.tax.utah.gov/TaxExpress/_/",
+   "alt": [
+    "https://www.utah.gov/pmn/files/1348679.pdf",
+    "https://le.utah.gov/interim/2022/pdf/00001063.pdf"
+   ],
+   "special": [
+    {
+     "note": "Grocery food: 1.75% state rate, 3% combined everywhere in Utah",
+     "url": "https://www.utah.gov/pmn/files/1348679.pdf",
+     "expect": "state sales tax rate for grocery food is 1\\.75 percent.{0,200}total combined rate on grocery food of 3 percent"
+    }
+   ]
   },
   {
    "code": "VT",
@@ -421,10 +535,13 @@
    "rate": 4.3,
    "hasStateTax": true,
    "local": true,
-   "url": "https://www.tax.virginia.gov/retail-sales-and-use-tax",
+   "url": "https://law.lis.virginia.gov/vacode/title58.1/chapter6/section58.1-603/",
    "lookup": "https://rrpl.maps.arcgis.com/apps/instant/lookup/index.html?appid=2c27121c640a4926ae4286cdd3eb5e78",
    "minLocal": 1.0,
-   "localNote": "A 1% local tax applies everywhere in Virginia, so the lowest combined rate is 5.3%; some regions add more."
+   "localNote": "A 1% local tax applies everywhere in Virginia, so the lowest combined rate is 5.3%; some regions add more.",
+   "alt": [
+    "https://www.tax.virginia.gov/retail-sales-and-use-tax"
+   ]
   },
   {
    "code": "WA",

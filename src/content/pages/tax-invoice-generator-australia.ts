@@ -57,5 +57,5 @@ ${h.table(['ATO detail', 'On the generated invoice'], [
 <p>The PDF is A4 with dates written the Australian way, such as ${h.date('2026-10-15', 'AU')}. The payment block holds a BSB and account number or a PayID. If you deliver in stages, the ${h.a('deposit-invoice', 'deposit invoice guide')} shows how to split GST between the deposit and the balance, and the ${h.a('tax-invoice-requirements-australia', 'tax invoice requirements guide')} covers recipient-created tax invoices and eInvoicing through Peppol.</p>`;
   },
   related: ['tax-invoice-requirements-australia', 'invoice-without-gst-template', 'deposit-invoice', 'invoice-vs-receipt', 'freelance-invoice-template'],
-  sources: ['ato_tax_invoices', 'ato_register', 'au_gst_act', 'abr_abn_format'],
+  sources: ['ato_tax_invoices', 'ato_register', 'au_gst_act', 'abr_abn_format', 'bga_invoicing', 'bga_gst_register'],
 });

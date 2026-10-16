@@ -11,7 +11,8 @@ export const SOURCES = raw.sources as Record<SourceKey, Source>;
 export const COUNTRIES = ['US', 'UK', 'CA', 'AU'] as const;
 export type Country = (typeof COUNTRIES)[number];
 
-export interface UsState { code: string; name: string; rate: number; hasStateTax: boolean; local: boolean; url: string; lookup?: string | null; minLocal?: number; localNote?: string; status?: string; checked?: string; via?: string }
+export interface UsState { code: string; name: string; rate: number; hasStateTax: boolean; local: boolean; url: string; lookup?: string | null; minLocal?: number; localNote?: string; status?: string; checked?: string; via?: string; read_from?: string; excerpt?: string; special?: SpecialRate[] }
+export interface SpecialRate { note: string; url: string; status: string; checked: string; excerpt?: string }
 export const US_STATES = (usRaw as { states: UsState[] }).states;
 export const US_RETRIEVED = (usRaw as { retrieved_at: string }).retrieved_at;
 export const usState = (code: string): UsState => US_STATES.find((s) => s.code === code) ?? US_STATES.find((s) => s.code === 'TX')!;

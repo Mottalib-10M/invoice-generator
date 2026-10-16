@@ -134,6 +134,11 @@ export default function InvoiceGenerator({ country = 'US', preset = 'standard', 
             : (st.country === 'US' || st.country === 'CA')
               ? <SelectField id="g-currency" label="Currency" value={st.currency} onChange={(v) => set('currency', v)} options={CURRENCIES.map((c) => ({ value: c, label: c }))} />
               : <span />}
+          {st0?.special?.filter((x) => x.status === 'verified').map((x) => (
+            <p key={x.note} className="col-span-2 rounded-md bg-navy-50 px-3 py-2 text-xs text-navy-700 sm:col-span-3">
+              <strong>{st0.name}:</strong> {x.note}. The generator applies the general rate: mark exempt lines "not taxable", and check a reduced rate with the <a href={x.url} rel="nofollow noopener" target="_blank" className="underline">official source</a>.
+            </p>
+          ))}
         </form>
 
         <form className={card} onSubmit={(e) => e.preventDefault()} aria-label="Items">
@@ -200,7 +205,7 @@ export default function InvoiceGenerator({ country = 'US', preset = 'standard', 
             <TextField id="g-sname" label={st.country === 'UK' && st.limitedCompany ? 'Full company name' : 'Business name'} value={st.seller.name} onChange={(v) => setSeller('name', v)} className="col-span-2" autoComplete="organization" />
             <TextArea id="g-saddr" label="Address" value={st.seller.address} onChange={(v) => setSeller('address', v)} className="col-span-2" rows={2} />
             <TextField id="g-semail" label="Email" type="email" value={st.seller.email ?? ''} onChange={(v) => setSeller('email', v)} autoComplete="email" />
-            <TextField id="g-staxid" label={info.idLabel} value={st.seller.taxId ?? ''} onChange={(v) => setSeller('taxId', v)} help={st.country === 'AU' ? '11 digits, checked against the ABR formula' : st.country === 'CA' ? '123456789 RT0001' : st.country === 'UK' ? 'GB 123 4567 89' : 'Optional'} />
+            <TextField id="g-staxid" label={info.idLabel} value={st.seller.taxId ?? ''} onChange={(v) => setSeller('taxId', v)} help={st.country === 'AU' ? '11 digits, checked against the ABR formula' : st.country === 'CA' ? '123456782 RT0001' : st.country === 'UK' ? 'GB 123 4567 89' : 'Optional'} />
             {st.country === 'CA' && st.region === 'QC' && <TextField id="g-sqst" label="QST registration number" value={st.seller.qstNo ?? ''} onChange={(v) => setSeller('qstNo', v)} help="1234567890 TQ0001" />}
             {st.country === 'UK' && <TextField id="g-sco" label="Company number (optional)" value={st.seller.companyNo ?? ''} onChange={(v) => setSeller('companyNo', v)} />}
             {st.country === 'UK' && (

@@ -68,9 +68,11 @@ h1 { font-weight: 700; } h2 { font-weight: 650; } h3 { font-weight: 600; }
 
 /* Printing from the generator: only the invoice paper is printed, at full width. */
 @media print {
-  body:has(.invoice-paper) * { visibility: hidden !important; }
-  body:has(.invoice-paper) .invoice-paper, body:has(.invoice-paper) .invoice-paper * { visibility: visible !important; }
-  body:has(.invoice-paper) .invoice-paper { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none !important; outline: none; --tw-ring-shadow: 0 0 #0000; }
+  /* Everything that neither holds nor sits inside the invoice is removed from the flow (not just hidden),
+     so the print is one page per invoice page, without blank pages after it. */
+  body:has(.invoice-paper) *:not(:has(.invoice-paper)):not(.invoice-paper):not(.invoice-paper *) { display: none !important; }
+  body:has(.invoice-paper) *:has(.invoice-paper) { margin: 0 !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; background: #fff !important; max-width: none !important; width: auto !important; display: block !important; position: static !important; }
+  body:has(.invoice-paper) .invoice-paper { position: static; width: 100%; margin: 0; box-shadow: none !important; outline: none; --tw-ring-shadow: 0 0 #0000; }
   @page { margin: 12mm; }
 }
 .invoice-tool { padding-bottom: 4.5rem; } @media (min-width: 1024px) { .invoice-tool { padding-bottom: 0; } }

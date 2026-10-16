@@ -5,7 +5,7 @@
 import { describe, it, expect } from 'vitest';
 import { computeInvoice, type InvoiceInput } from './invoice';
 import { checkInvoice, type InvoiceDoc } from './compliance';
-import { abnValid, ukVatFormatValid, caBnValid, qstValid } from './ids';
+import { abnValid, ukVatFormatValid, caBnValid, caBnCheckDigitValid, caBnFormatValid, qstValid } from './ids';
 import { ukLateInterest, earlyDiscount, nextNumber, dueDate, cisDeduction, formatNumberPattern } from './terms';
 import { P, usState, ukReferenceRate } from './params';
 
@@ -134,7 +134,12 @@ describe('Terms, numbers and IDs', () => {
   it('ABN check digit: the ABR example 51 824 753 556 is valid', () => { expect(abnValid('51 824 753 556')).toBe(true); expect(abnValid('51 824 753 557')).toBe(false); });
   it('format checks', () => {
     expect(ukVatFormatValid('GB 123 4567 89')).toBe(true); expect(ukVatFormatValid('12345')).toBe(false);
-    expect(caBnValid('123456789 RT0001')).toBe(true); expect(qstValid('1234567890TQ0001')).toBe(true);
+    expect(caBnValid('123456782 RT0001')).toBe(true); expect(qstValid('1234567890TQ0001')).toBe(true);
+  });
+  it('business number check digit: the CRA example 999 999 998 passes, a mistyped digit fails', () => {
+    expect(caBnCheckDigitValid('999999998')).toBe(true); expect(caBnCheckDigitValid('999999997')).toBe(false);
+    expect(caBnValid('123456782 RT0001')).toBe(true); expect(caBnValid('123456789 RT0001')).toBe(false);
+    expect(caBnFormatValid('123456789 RT0001')).toBe(true);
   });
 });
 
