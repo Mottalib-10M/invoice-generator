@@ -1,14 +1,20 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { route } from '../i18n/routes';
+import { GA4_ID } from '../data/site-config';
 const lang = 'en';
 ---
-<PageLayout title="Cookies on Tax Invoice Maker: none, and what your browser keeps" description="No cookies on this invoice generator. What it keeps in your browser's local storage for the next invoice, how to delete it, and the cookie-free stability monitoring." lang={lang} noindex={true} breadcrumbs={[{ label: 'Cookies' }]} showAuthor={false}>
+<PageLayout title="Cookies on Tax Invoice Maker: Google Analytics, and what your browser keeps" description="Google Analytics audience cookies only, no advertising. What it keeps in your browser's local storage for the next invoice, how to delete it, and the cookie-free stability monitoring." lang={lang} noindex={true} breadcrumbs={[{ label: 'Cookies' }]} showAuthor={false}>
   <div class="prose prose-slate max-w-none">
     <h1>Cookies</h1>
-    <p>No page of the site sets a cookie, advertising or otherwise.</p>
+    <p>The site sets Google Analytics audience measurement cookies and those alone: no advertising cookie, no social media cookie.</p>
+    <table><thead><tr><th>Name</th><th>Provider</th><th>Purpose</th><th>Lifetime</th></tr></thead><tbody>
+    <tr><td><code>_ga</code></td><td>Google Analytics</td><td>Tell visitors apart with a random identifier</td><td>13 months at most (390 days)</td></tr>
+    <tr><td><code>_ga_{GA4_ID.replace('G-', '')}</code></td><td>Google Analytics</td><td>Keep the state of the current visit</td><td>13 months at most (390 days)</td></tr>
+    </tbody></table>
+    <p>These lifetimes are not extended on each visit. IP address anonymised; ad storage, ad personalisation and Google signals switched off. Provider: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland; data may be transferred to Google LLC in the United States under the EU–U.S. Data Privacy Framework and standard contractual clauses. Retention at Google: 14 months. Legal basis: legitimate interests (Article 6(1)(f) GDPR). To object: block or delete cookies in your browser, or install the <a href="https://tools.google.com/dlpage/gaoptout" rel="nofollow noopener" target="_blank">Google Analytics opt-out browser add-on</a>.</p>
     <h2>What stays in your browser</h2>
-    <p>So that you do not retype them, the generator keeps your own business details in your browser's local storage on this device: business name, address, email, tax number, logo, payment details, notes, country and last invoice number. This is not a cookie and it is never sent to us. The "Forget my details" link under the generator's checklist deletes it, and so does clearing the site data in your browser. Customer details and invoice lines are not kept.</p>
+    <p>So that you do not retype them, the generator keeps your own business details in your browser's local storage on this device: business name, address, email, tax number, logo, payment details, notes, country and last invoice number. This storage is never sent to us. The "Forget my details" link under the generator's checklist deletes it, and so does clearing the site data in your browser. Customer details and invoice lines are not kept.</p>
     <h2>Anonymous stability monitoring</h2>
     <p>To find broken pages, script errors and slow loading, the site can load Microsoft Clarity, from Microsoft Ireland Operations Limited, in its cookie-free mode. Clarity then sets no cookie, gives each page view a one-off identifier and does not link visits. Everything typed in the generator, and the invoice preview, is masked before anything is sent. Blocking the clarity.ms domain stops this monitoring without affecting the generator.</p>
     <p>The <a href={route('privacy', lang)}>privacy policy</a> explains who receives the monitoring data and for how long.</p>
