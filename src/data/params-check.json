@@ -1,79 +1,79 @@
 {
  "uk_invoice": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include",
   "missing": []
  },
  "uk_vat_records": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/guidance/record-keeping-for-vat-notice-70021",
   "missing": []
  },
  "uk_vat_guide": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/guidance/vat-guide-notice-700",
   "missing": []
  },
  "uk_vat_rates": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/vat-rates",
   "missing": []
  },
  "uk_vat_register": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/vat-registration/when-to-register",
   "missing": []
  },
  "uk_reverse_charge": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/guidance/vat-reverse-charge-technical-guide",
   "missing": []
  },
  "uk_cis": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/what-you-must-do-as-a-cis-contractor/make-deductions-and-pay-subcontractors",
   "missing": []
  },
  "uk_late_terms": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/late-commercial-payments-interest-debt-recovery/payment-terms",
   "missing": []
  },
  "uk_late_interest": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/late-commercial-payments-interest-debt-recovery/charging-interest-commercial-debt",
   "missing": []
  },
  "uk_late_costs": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.uk/late-commercial-payments-interest-debt-recovery/claim-debt-recovery-costs",
   "missing": []
  },
  "uk_late_rate_order": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.legislation.gov.uk/uksi/2002/1675/made",
   "missing": []
  },
  "ca_itc_regs": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-91-45/FullText.html",
   "missing": []
  },
  "cra_bn_check": {
   "status": "changed",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://bac-lac.wayback.archive-it.org/web/20061210041004/http:/www.cra-arc.gc.ca/eservices/magmedia/sin-e.pdf",
   "missing": [
    "first nine digits of a Business Number",
@@ -82,61 +82,57 @@
  },
  "ca_eta": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://laws-lois.justice.gc.ca/eng/acts/E-15/FullText.html",
   "missing": []
  },
  "rq_invoices": {
-  "status": "ok",
-  "checked": "2026-10-19",
-  "read_from": "https://web.archive.org/web/20250326015335id_/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/preparing-invoices/",
-  "missing": []
+  "status": "unreachable",
+  "checked": "2026-10-26"
  },
  "rq_small": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://web.archive.org/web/20250915100037id_/https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/registering-for-the-gst-and-qst/small-suppliers/",
   "missing": []
  },
  "bc_pst": {
-  "status": "ok",
-  "checked": "2026-10-19",
-  "read_from": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/pst",
-  "missing": []
+  "status": "unreachable",
+  "checked": "2026-10-26"
  },
  "mb_rst": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://www.gov.mb.ca/finance/taxation/taxes/retail.html",
   "missing": []
  },
  "ato_tax_invoices": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://web.archive.org/web/20261007084104id_/https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/tax-invoices",
   "missing": []
  },
  "ato_register": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://web.archive.org/web/20261007014616id_/https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst",
   "missing": []
  },
  "bga_invoicing": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://business.gov.au/finance/payments-and-invoicing/invoicing",
   "missing": []
  },
  "bga_gst_register": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://business.gov.au/registrations/register-for-taxes/register-for-goods-and-services-tax-gst",
   "missing": []
  },
  "abr_abn_format": {
   "status": "ok",
-  "checked": "2026-10-19",
+  "checked": "2026-10-26",
   "read_from": "https://abr.business.gov.au/Help/AbnFormat",
   "missing": []
  }
