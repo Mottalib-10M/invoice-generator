@@ -130,7 +130,7 @@ export default function InvoiceGenerator({ country = 'US', preset = 'standard', 
           <Toggle id="g-reg" label={regLabel} value={st.registered ? '1' : '0'} onChange={(v) => set('registered', v === '1')} options={[{ value: '0', label: 'No' }, { value: '1', label: 'Yes' }]} />
           <Toggle id="g-incl" label="Prices include tax?" value={st.inclusive ? '1' : '0'} onChange={(v) => set('inclusive', v === '1')} options={[{ value: '0', label: 'No' }, { value: '1', label: 'Yes' }]} />
           {st.country === 'US' && st.registered
-            ? <NumberField id="g-local" label="Local rate" value={st.localRate} onChange={(v) => set('localRate', v)} unit="%" max={10} decimals={3} help={st0?.local ? 'City, county, district' : 'No local tax here'} />
+            ? <NumberField id="g-local" label="Local rate" value={st.localRate} onChange={(v) => set('localRate', v)} unit="%" max={10} decimals={3} help={st0?.local ? 'City, county, district: add yours' : 'No local tax here'} />
             : (st.country === 'US' || st.country === 'CA')
               ? <SelectField id="g-currency" label="Currency" value={st.currency} onChange={(v) => set('currency', v)} options={CURRENCIES.map((c) => ({ value: c, label: c }))} />
               : <span />}
@@ -158,15 +158,15 @@ export default function InvoiceGenerator({ country = 'US', preset = 'standard', 
                   <button type="button" onClick={() => removeLine(i)} disabled={st.lines.length === 1} className="h-12 rounded-lg text-xl leading-none text-navy-400 hover:bg-white hover:text-navy-700 disabled:opacity-30" aria-label={`Remove line ${i + 1}`}>×</button>
                 </div>
                 <div className="mt-2 grid grid-cols-[4.75rem_minmax(0,1fr)_minmax(0,1.15fr)] items-center gap-2 sm:grid-cols-[4.75rem_7rem_minmax(0,1fr)_6.5rem]">
-                  <div><span aria-hidden="true" className="mb-0.5 block text-[11px] font-semibold uppercase tracking-wide text-navy-500">{st.hourly ? 'Hours' : 'Qty'}</span>
+                  <div><span aria-hidden="true" className="mb-0.5 block text-xs font-semibold uppercase tracking-wide text-navy-500">{st.hourly ? 'Hours' : 'Qty'}</span>
                     <CellNumber id={`g-qty-${i}`} label={`${st.hourly ? 'Hours' : 'Quantity'}, line ${i + 1}`} value={l.qty} decimals={3} max={1_000_000} onChange={(v) => setLine(i, { qty: v })} locale={info.locale} /></div>
-                  <div><span aria-hidden="true" className="mb-0.5 block text-[11px] font-semibold uppercase tracking-wide text-navy-500">{st.hourly ? 'Rate' : st.inclusive ? 'Price incl. tax' : 'Unit price'}</span>
+                  <div><span aria-hidden="true" className="mb-0.5 block text-xs font-semibold uppercase tracking-wide text-navy-500">{st.hourly ? 'Rate' : st.inclusive ? 'Price incl. tax' : 'Unit price'}</span>
                     <CellNumber id={`g-price-${i}`} label={`${st.hourly ? 'Rate' : 'Unit price'}, line ${i + 1}`} value={l.price} onChange={(v) => setLine(i, { price: v })} locale={info.locale} /></div>
-                  <div><span aria-hidden="true" className="mb-0.5 block text-[11px] font-semibold uppercase tracking-wide text-navy-500">Tax</span>
+                  <div><span aria-hidden="true" className="mb-0.5 block text-xs font-semibold uppercase tracking-wide text-navy-500">Tax</span>
                     <div className="relative">
                       <label htmlFor={`g-tax-${i}`} className="sr-only">Tax, line {i + 1}</label>
                       <select id={`g-tax-${i}`} value={l.tax} disabled={!st.registered} onChange={(e) => setLine(i, { tax: e.target.value as Line['tax'] })}
-                        className="h-12 w-full appearance-none truncate rounded-lg border border-navy-300 bg-white pl-2.5 pr-8 text-sm text-navy-900 disabled:bg-navy-50 disabled:text-navy-400 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20">
+                        className="h-12 w-full appearance-none truncate rounded-lg border border-navy-300 bg-white pl-2.5 pr-8 text-base text-navy-900 disabled:bg-navy-50 disabled:text-navy-400 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20">
                         {opts.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                       </select>
                       <svg className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-500" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 7.5l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" /></svg>

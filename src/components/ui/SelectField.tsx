@@ -3,7 +3,7 @@ interface Props { id: string; label: string; value: string; onChange: (v: string
 
 export default function SelectField({ id, label, value, onChange, options, help, className = '' }: Props) {
   return (
-    <div className={`grid grid-rows-subgrid row-span-3 content-start gap-y-0 ${className}`}>
+    <div className={`grid min-w-0 grid-rows-subgrid row-span-3 content-start gap-y-0 ${className}`}>
       <label htmlFor={id} className="mb-1 block text-sm font-medium text-navy-700">{label}</label>
       <div className="relative self-start">
         <select id={id} value={value} onChange={(e) => onChange(e.target.value)} aria-describedby={help ? `${id}-help` : undefined}
